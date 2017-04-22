@@ -2,10 +2,12 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const PurifyCSSPlugin = require('purifycss-webpack');
 const glob = require('glob');
+const fs = require('fs');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const isProduction = (process.env.NODE_ENV === 'production');
-const extractCSS = new ExtractTextPlugin('[chunkhash].style.css');
+const fileNamePrefix = isProduction? '[chunkhash].' : '';
+const extractCSS = new ExtractTextPlugin(fileNamePrefix + 'style.css');
 const pathsToClean = [
   'dist'
 ];
@@ -21,7 +23,7 @@ module.exports = {
   entry: "./src/js/index.js",
   output: {
       path: __dirname + "/dist",
-      filename: "[chunkhash].bundle.js"
+      filename: fileNamePrefix + "bundle.js"
   },
   module: {
     rules: [
@@ -76,6 +78,13 @@ module.exports = {
       minimize: isProduction,
     }),
     new CleanWebpackPlugin(pathsToClean, cleanOptions),
+    function() {
+      this.plugin("done", function(status) {
+        require("fs").writeFileSync(
+          __dirname + "/dist/manifest.json",
+          JSON.stringify(status.toJson().assetsByChunkName));
+      });
+    }
   ],
 };
 
