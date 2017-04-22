@@ -33,12 +33,25 @@ module.exports = {
         })
       },
       {
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        test: /\.(eot|ttf|woff|woff2)$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
           name: 'images/[name].[ext]'
         }
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loaders: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              name: 'images/[name].[ext]'
+            }
+          },
+          'img-loader'
+        ],
       },
       {
         test: /\.js$/,
@@ -71,3 +84,7 @@ if(isProduction) {
     new webpack.optimize.UglifyJsPlugin()
   );
 }
+
+/**
+ * Ubuntu - https://packages.debian.org/jessie/amd64/libpng12-0/download
+ */
