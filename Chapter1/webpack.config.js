@@ -67,7 +67,7 @@ module.exports = {
       }
     ]
   },
-  watch: true,
+  watch: !isProduction,
   plugins: [
     extractCSS,
     new webpack.LoaderOptionsPlugin({
@@ -86,6 +86,7 @@ module.exports = {
       });
     }
   ],
+  devtool: 'source-map',
 };
 
 if(isProduction) {
