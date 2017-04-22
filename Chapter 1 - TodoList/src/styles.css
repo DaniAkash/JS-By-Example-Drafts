@@ -27,3 +27,6 @@ body {
 .delete-icon {
   color: red;
 }
+.complete {
+  text-decoration: line-through;
+}
