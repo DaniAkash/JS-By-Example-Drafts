@@ -34,9 +34,67 @@
 
   <div class="container">
 
-    <div class="starter-template">
-      <h1>Bootstrap starter template</h1>
-      <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+    <div class="content-area row">
+      <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2"></div>
+
+      <div class="col-md-8 col-xs-8 col-lg-8 col-sm-8">
+        <h2>ToDo List</h2>
+
+        <div class="row input-area">
+          <div class="col-md-1"></div>
+          <div class="form-group col-md-9">
+            <input type="text" placeholder="New Task" class="form-control" id="addTask">
+          </div>
+          <div class="form-group col-md-1">
+            <button class="btn btn-primary">Add</button>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+
+        <ul class="list-group">
+          <li class="list-group-item checkbox">
+            <div class="row">
+              <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 checkbox">
+                <label><input type="checkbox" value="" class=""></label>
+              </div>
+              <div class="col-md-10 col-xs-10 col-lg-10 col-sm-10 task-text">
+                First item
+              </div>
+              <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 delete-icon-area">
+                <a class="" href="/"><i class="delete-icon glyphicon glyphicon-trash"></i></a>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item checkbox">
+            <div class="row">
+              <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 checkbox">
+                <label><input type="checkbox" value="" class=""></label>
+              </div>
+              <div class="col-md-10 col-xs-10 col-lg-10 col-sm-10 task-text">
+                Second item
+              </div>
+              <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 delete-icon-area">
+                <a class="" href="/"><i class="delete-icon glyphicon glyphicon-trash hidden"></i></a>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item checkbox">
+            <div class="row">
+              <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 checkbox">
+                <label><input type="checkbox" value="" class=""></label>
+              </div>
+              <div class="col-md-10 col-xs-10 col-lg-10 col-sm-10 task-text">
+                Third item
+              </div>
+              <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 delete-icon-area">
+                <a class="" href="/"><i class="delete-icon glyphicon glyphicon-trash"></i></a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2"></div>
     </div>
 
   </div><!-- /.container -->
