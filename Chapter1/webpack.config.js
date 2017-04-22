@@ -33,15 +33,15 @@ module.exports = {
         })
       },
       {
-        test: /\.(eot|ttf|woff|woff2)$/,
+        test: /\.(svg|eot|ttf|woff|woff2)$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'images/[name].[ext]'
+          name: 'fonts/[name].[ext]'
         }
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif)$/,
         loaders: [
           {
             loader: 'url-loader',
