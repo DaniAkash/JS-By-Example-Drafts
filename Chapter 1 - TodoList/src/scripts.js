@@ -1,4 +1,4 @@
-class ToDos {
+class ToDoClass {
 
   constructor() {
     this.tasks = [
@@ -6,16 +6,42 @@ class ToDos {
       {task: 'Do Gardening', isComplete: true},
       {task: 'Renew Library Account', isComplete: false},
     ];
-    this.loadTasks = this.loadTasks.bind(this);
-    this.generateTaskHtml = this.generateTaskHtml.bind(this);
 
     this.loadTasks();
+    this.addEventListeners();
+  }
+
+  addEventListeners() {
+    // Delete Task
     document.getElementById('taskList').addEventListener("click", event=> {
       if(event.target.id === 'deleteTask') {
         event.preventDefault();
         this.deleteTask(event.target);
       }
     });
+
+    // Add Task
+    document.getElementById('addTask').addEventListener("keypress", event => {
+      if(event.keyCode === 13) {
+        this.addTask(event.target.value);
+        event.target.value = "";
+      }
+    });
+  }
+
+  addTaskClick() {
+    let target = document.getElementById('addTask');
+    this.addTask(target.value);
+    target.value = ""
+  }
+
+  addTask(task) {
+    let newTask = {
+      task,
+      isComplete: false,
+    };
+    this.tasks.push(newTask);
+    this.loadTasks();
   }
 
   deleteTask(target) {
@@ -49,4 +75,8 @@ class ToDos {
 
 }
 
-window.addEventListener("load", new ToDos());
+let toDo;
+
+window.addEventListener("load", () => {
+  toDo = new ToDoClass()
+});
