@@ -40,7 +40,17 @@ class ToDoClass {
       task,
       isComplete: false,
     };
-    this.tasks.push(newTask);
+    if(task === '') {
+      document.getElementById('addTask').parentElement.classList.add('has-error');
+    } else {
+      document.getElementById('addTask').parentElement.classList.remove('has-error');
+      this.tasks.push(newTask);
+      this.loadTasks();
+    }
+  }
+
+  toggleTaskStatus(index) {
+    this.tasks[index].isComplete = !this.tasks[index].isComplete;
     this.loadTasks();
   }
 
@@ -55,7 +65,7 @@ class ToDoClass {
       <li class="list-group-item checkbox">
         <div class="row">
           <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 checkbox">
-            <label><input id="toggleTaskStatus" type="checkbox" value="" class="" ${task.isComplete?'checked':''}></label>
+            <label><input id="toggleTaskStatus" type="checkbox" onchange="toDo.toggleTaskStatus(${index})" value="" class="" ${task.isComplete?'checked':''}></label>
           </div>
           <div class="col-md-10 col-xs-10 col-lg-10 col-sm-10 task-text ${task.isComplete?'complete':''}">
             ${task.task}
