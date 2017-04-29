@@ -13,12 +13,12 @@ class ToDoClass {
 
   addEventListeners() {
     // Delete Task
-    document.getElementById('taskList').addEventListener("click", event=> {
-      if(event.target.id === 'deleteTask') {
-        event.preventDefault();
-        this.deleteTask(event.target);
-      }
-    });
+    // document.getElementById('taskList').addEventListener("click", event=> {
+    //   if(event.target.id === 'deleteTask') {
+    //     event.preventDefault();
+    //     this.deleteTask(event.target);
+    //   }
+    // });
 
     // Add Task
     document.getElementById('addTask').addEventListener("keypress", event => {
@@ -54,11 +54,18 @@ class ToDoClass {
     this.loadTasks();
   }
 
-  deleteTask(target) {
-    let taskIndex = target.getAttribute('data-id');
+  deleteTask(event, taskIndex) {
+    console.log(event, taskIndex);
+    event.preventDefault();
     this.tasks.splice(taskIndex, 1);
     this.loadTasks();
   }
+
+  // deleteTask(target) {
+  //   let taskIndex = target.getAttribute('data-id');
+  //   this.tasks.splice(taskIndex, 1);
+  //   this.loadTasks();
+  // }
 
   generateTaskHtml(task, index) {
     return `
@@ -71,7 +78,7 @@ class ToDoClass {
             ${task.task}
           </div>
           <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 delete-icon-area">
-            <a class="" href="/"><i id="deleteTask" data-id="${index}" class="delete-icon glyphicon glyphicon-trash"></i></a>
+            <a class="" href="/" onClick="toDo.deleteTask(event, ${index})"><i id="deleteTask" data-id="${index}" class="delete-icon glyphicon glyphicon-trash"></i></a>
           </div>
         </div>
       </li>
