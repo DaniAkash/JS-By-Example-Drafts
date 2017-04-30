@@ -1,24 +1,22 @@
+const TASKS = 'TASKS';
+
 class ToDoClass {
 
   constructor() {
-    this.tasks = [
-      {task: 'Go to Dentist', isComplete: false},
-      {task: 'Do Gardening', isComplete: true},
-      {task: 'Renew Library Account', isComplete: false},
-    ];
+    this.tasks = JSON.parse(localStorage.getItem(TASKS));
+    if(!this.tasks) {
+      this.tasks = [
+        {task: 'Go to Dentist', isComplete: false},
+        {task: 'Do Gardening', isComplete: true},
+        {task: 'Renew Library Account', isComplete: false},
+      ];
+    }
 
     this.loadTasks();
     this.addEventListeners();
   }
 
   addEventListeners() {
-    // Delete Task
-    // document.getElementById('taskList').addEventListener("click", event=> {
-    //   if(event.target.id === 'deleteTask') {
-    //     event.preventDefault();
-    //     this.deleteTask(event.target);
-    //   }
-    // });
 
     // Add Task
     document.getElementById('addTask').addEventListener("keypress", event => {
@@ -86,6 +84,7 @@ class ToDoClass {
   }
 
   loadTasks() {
+    localStorage.setItem(TASKS, JSON.stringify(this.tasks));
     let tasksHtml = this.tasks.reduce((html, task, index) => html += this.generateTaskHtml(task, index), '');
     document.getElementById('taskList').innerHTML = tasksHtml;
   }
