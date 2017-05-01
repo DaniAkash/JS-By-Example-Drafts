@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "babel src/scripts.js -o dist/scripts.js --presets=es2015 -ws",
-    "build": "rm -r dist/* && babel src/scripts.js -o dist/scripts.js --presets=es2015"
+    "watch": "babel src -d dist --presets=es2015 -ws",
+    "build": "rm -r dist/* && babel src -d dist --presets=es2015"
   },
   "author": "Dani Akash",
   "license": "ISC",
