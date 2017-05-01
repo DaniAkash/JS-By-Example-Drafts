@@ -59,12 +59,6 @@ class ToDoClass {
     this.loadTasks();
   }
 
-  // deleteTask(target) {
-  //   let taskIndex = target.getAttribute('data-id');
-  //   this.tasks.splice(taskIndex, 1);
-  //   this.loadTasks();
-  // }
-
   generateTaskHtml(task, index) {
     return `
       <li class="list-group-item checkbox">
