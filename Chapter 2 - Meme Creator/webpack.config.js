@@ -35,6 +35,26 @@ module.exports = {
         })
       },
       {
+        test: /\.less$/,
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: !isProduction
+            }
+          },
+          {
+            loader: "less-loader",
+            options: {
+              sourceMap: !isProduction
+            }
+          }
+        ]
+      },
+      {
         test: /\.(svg|eot|ttf|woff|woff2)$/,
         loader: 'url-loader',
         options: {

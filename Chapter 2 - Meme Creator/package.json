@@ -4,7 +4,8 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "watch": "webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,8 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
     "img-loader": "^2.0.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.3",
     "purifycss-webpack": "^0.6.1",
     "style-loader": "^0.17.0",
     "url-loader": "^0.5.8",
