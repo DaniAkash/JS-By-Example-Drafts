@@ -3,7 +3,13 @@ import 'bootstrap';
 
 class home {
     constructor() {
-        console.log($);
+      debugger;
+      console.log('hello world!');
+      this.hello();
+    }
+
+    hello() {
+      debugger;
     }
 }
 
