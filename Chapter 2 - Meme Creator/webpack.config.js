@@ -83,6 +83,13 @@ module.exports = {
       jquery: 'jquery'
     }),
     new CleanWebpackPlugin(pathsToClean, cleanOptions),
+  ],
+  devtool: !isProduction?'source-map':'',
+};
+
+if(isProduction) {
+  module.exports.plugins.push(
+    new webpack.optimize.UglifyJsPlugin(),
     function() {
       this.plugin("done", function(status) {
         require("fs").writeFileSync(
@@ -90,13 +97,6 @@ module.exports = {
           JSON.stringify(status.toJson().assetsByChunkName));
       });
     }
-  ],
-  devtool: 'source-map',
-};
-
-if(isProduction) {
-  module.exports.plugins.push(
-    new webpack.optimize.UglifyJsPlugin()
   );
 }
 
