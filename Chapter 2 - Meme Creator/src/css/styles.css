@@ -1,9 +1,35 @@
 body {
-    background-color: royalblue;
-    background-image: url('../assets/Ys2vmh6.jpg');
+  padding-top: 65px;
 }
-
-/*.cool {
-    background-color: red;
-}*/
-/*@import url("../../node_modules/bootstrap/dist/css/bootstrap.min.css");*/
+.body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.canvas-area {
+  margin: 10px;
+  display: flex;
+  flex: 2;
+  align-items: center;
+  justify-content: center;
+}
+.canvas {
+  border: 1px solid #000000;
+}
+.input-area {
+  margin-right: 30px !important;
+  margin: 10px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.form-group {
+  display: flex;
+  width: 100%;
+  flex-direction: column !important;
+}
+.download-button {
+  margin-top: 10px;
+}
