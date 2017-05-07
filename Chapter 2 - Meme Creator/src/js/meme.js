@@ -2,11 +2,11 @@ const deviceWidth = window.innerWidth;
 
 class Meme {
     constructor() {
-      console.log('cool');
       this.canvas = document.getElementById('imgCanvas');
-      this.topText = document.getElementById('topText');
-      this.bottomText = document.getElementById('bottomText');
-      this.image = document.getElementById('image');
+      this.topTextInput = document.getElementById('topText');
+      this.bottomTextInput = document.getElementById('bottomText');
+      this.imageInput = document.getElementById('image');
+      this.downloadButton = document.getElementById('downloadMeme');
 
       this.createCanvas();
       this.addEventListeners();
@@ -22,9 +22,19 @@ class Meme {
 
     addEventListeners() {
       this.createMeme = this.createMeme.bind(this);
-      let inputNodes = [this.topText, this.bottomText, this.image];
+      this.downloadMeme = this.downloadMeme.bind(this);
+
+      let inputNodes = [this.topTextInput, this.bottomTextInput, this.imageInput];
       inputNodes.forEach(element => element.addEventListener('keyup', this.createMeme));
       inputNodes.forEach(element => element.addEventListener('change', this.createMeme));
+      this.downloadButton.addEventListener('click', this.downloadMeme)
+    }
+
+    downloadMeme() {
+      let imageSource = this.canvas.toDataURL("image/png");
+      let att = document.createAttribute('href');
+      att.value = imageSource.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+      this.downloadButton.setAttributeNode(att);
     }
 
     resizeCanvas(canvasHeight, canvasWidth) {
@@ -43,7 +53,7 @@ class Meme {
     createMeme() {
       let ctx = this.canvas.getContext('2d');
 
-      if (this.image.files && this.image.files[0]) {
+      if (this.imageInput.files && this.imageInput.files[0]) {
         let reader = new FileReader();
         let image = new Image();
 
@@ -64,18 +74,18 @@ class Meme {
             ctx.textAlign = 'center';
             ctx.textBaseline = 'top';
 
-            ctx.strokeText(this.topText.value.toUpperCase(), this.canvas.width/2, this.canvas.height*(5/100));
-            ctx.fillText(this.topText.value.toUpperCase(), this.canvas.width/2, this.canvas.height*(5/100));
+            ctx.strokeText(this.topTextInput.value.toUpperCase(), this.canvas.width/2, this.canvas.height*(5/100));
+            ctx.fillText(this.topTextInput.value.toUpperCase(), this.canvas.width/2, this.canvas.height*(5/100));
 
-            ctx.strokeText(this.bottomText.value.toUpperCase(), this.canvas.width/2, this.canvas.height*(90/100));
-            ctx.fillText(this.bottomText.value.toUpperCase(), this.canvas.width/2, this.canvas.height*(90/100));
+            ctx.strokeText(this.bottomTextInput.value.toUpperCase(), this.canvas.width/2, this.canvas.height*(90/100));
+            ctx.fillText(this.bottomTextInput.value.toUpperCase(), this.canvas.width/2, this.canvas.height*(90/100));
 
             this.resizeCanvas(this.canvas.height, this.canvas.width);
           }
           image.src = reader.result;
         }
 
-        reader.readAsDataURL(this.image.files[0]);
+        reader.readAsDataURL(this.imageInput.files[0]);
       }
     }
 }
