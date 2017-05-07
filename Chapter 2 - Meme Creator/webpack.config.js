@@ -20,11 +20,14 @@ const cleanOptions = {
 
 module.exports = {
   context: __dirname,
-  entry: "./src/js/index.js",
+  entry: {
+    general: './src/js/index.js',
+    meme: './src/js/meme.js',
+  },
   output: {
       path: __dirname + "/dist",
-      filename: fileNamePrefix + "bundle.js",
-      library: 'bundle'
+      filename: fileNamePrefix + '[name].js',
+      library: 'bundle',
   },
   module: {
     rules: [
