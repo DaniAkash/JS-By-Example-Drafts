@@ -13,7 +13,7 @@ body {
   align-items: center;
   justify-content: center;
 }
-.canvas {
+.img-canvas {
   border: 1px solid #000000;
 }
 .input-area {
@@ -29,6 +29,13 @@ body {
   display: flex;
   width: 100%;
   flex-direction: column !important;
+}
+.dimensions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: stretch;
+  width: 100%;
 }
 .download-button {
   margin-top: 10px;

@@ -5,13 +5,20 @@ import 'bootstrap';
 
 class home {
     constructor() {
-      debugger;
-      console.log('hello world!');
-      this.hello();
+      this.canvas = document.getElementById('imgCanvas');
+
+      this.createCanvas();
     }
 
-    hello() {
-      debugger;
+    createCanvas() {
+      let ctx = this.canvas.getContext('2d');
+
+      let deviceWidth = window.innerWidth;
+      let canvasWidth = Math.min(640, deviceWidth-30);
+      let canvasHeight = Math.min(480, deviceWidth-30);
+
+      document.getElementById('width').value = this.canvas.width = canvasWidth;
+      document.getElementById('height').value = this.canvas.height = canvasHeight;
     }
 }
 
