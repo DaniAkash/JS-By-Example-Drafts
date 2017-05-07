@@ -1,3 +1,5 @@
+const deviceWidth = window.innerWidth;
+
 class Meme {
     constructor() {
       console.log('cool');
@@ -11,13 +13,11 @@ class Meme {
     }
 
     createCanvas() {
-      let deviceWidth = window.innerWidth;
       let canvasHeight = Math.min(480, deviceWidth-30);
       let canvasWidth = Math.min(640, deviceWidth-30);
 
       this.canvas.height = canvasHeight;
       this.canvas.width = canvasWidth;
-
     }
 
     addEventListeners() {
@@ -32,9 +32,9 @@ class Meme {
       let width = canvasWidth;
       this.canvas.style.height = `${height}px`;
       this.canvas.style.width = `${width}px`;
-      while(height > 1000 || width > 1000) {
+      while(height > Math.min(1000, deviceWidth-30) && width > Math.min(1000, deviceWidth-30)) {
         height /= 2;
-        width /= 2 ;
+        width /= 2;
         this.canvas.style.height = `${height}px`;
         this.canvas.style.width = `${width}px`;
       }
