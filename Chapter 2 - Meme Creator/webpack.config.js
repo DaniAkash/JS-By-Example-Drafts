@@ -23,7 +23,8 @@ module.exports = {
   entry: "./src/js/index.js",
   output: {
       path: __dirname + "/dist",
-      filename: fileNamePrefix + "bundle.js"
+      filename: fileNamePrefix + "bundle.js",
+      library: 'bundle'
   },
   module: {
     rules: [
