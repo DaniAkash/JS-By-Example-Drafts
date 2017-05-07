@@ -94,7 +94,7 @@ module.exports = {
       minimize: isProduction,
     }),
     new PurifyCSSPlugin({
-      paths: glob.sync(__dirname + '/src/*.html'),
+      paths: glob.sync(__dirname + '/*.html'),
       minimize: isProduction,
     }),
     new webpack.ProvidePlugin({
