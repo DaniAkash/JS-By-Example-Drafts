@@ -1,0 +1,36 @@
+.contents {
+  padding-top: 65px;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.cover {
+  height: 50vh;
+  width: 90vw;
+  background-color: red;
+  margin: 10px;
+}
+.details {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 90vw;
+}
+.day {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: blue;
+}
+@media only screen and (max-width: 736px) {
+  .day {
+    width: 90vw !important;
+  }
+}
+@media only screen and (min-width: 737px) {
+  .day {
+    width: 22.5vw;
+  }
+}
