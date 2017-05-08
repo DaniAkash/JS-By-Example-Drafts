@@ -8,3 +8,8 @@ import '../css/styles.css';
  * Bootstrap JS File
  */
 import 'bootstrap';
+
+/**
+ * Web Component Polyfill
+ */
+import 'webcomponents.js';
