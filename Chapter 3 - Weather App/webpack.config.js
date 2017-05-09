@@ -95,6 +95,7 @@ module.exports = {
   watch: !isProduction,
   plugins: [
     extractCSS,
+    extractLess,
     new webpack.LoaderOptionsPlugin({
       minimize: isProduction,
     }),
