@@ -6,11 +6,19 @@ window.addEventListener('WebComponentsReady', function(e) {
 });
 
 window.onload = function() {
-  var startPos;
-  var geoSuccess = function(position) {
-    startPos = position;
-    console.log(startPos.coords.latitude);
-    console.log(startPos.coords.longitude);
-  };
-  navigator.geolocation.getCurrentPosition(geoSuccess);
+  getLocation();
 };
+
+function getLocation() {
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, errorPosition);
+  } else {
+      console.log("Geolocation is not supported by this browser.");
+  }
+}
+function showPosition(position) {
+  console.log(position.coords.latitude, position.coords.longitude);
+}
+function errorPosition(error) {
+  console.log(error, 'unable to get position');
+}
