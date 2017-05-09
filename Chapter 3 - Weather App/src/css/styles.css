@@ -6,10 +6,75 @@
   justify-content: space-around;
 }
 .cover {
-  height: 50vh;
   width: 90vw;
-  background-color: silver;
+  background-color: skyblue;
   margin: 10px;
+  border-radius: 15px;
+  display: flex;
+}
+@media only screen and (max-width: 736px) {
+  .cover {
+    height: 30vh;
+  }
+}
+@media only screen and (min-width: 737px) {
+  .cover {
+    height: 50vh;
+  }
+}
+.cover-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cover-icon {
+  max-height: 40vh;
+  max-width: 40vw;
+}
+.cover-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 2vw;
+}
+.title-area {
+  width: 45vw;
+}
+.details-area {
+  width: 45vw;
+}
+.cover-title {
+  text-align: right;
+}
+.cover-temp {
+  text-align: right;
+}
+.cover-location {
+  text-align: right;
+}
+.cover-time {
+  text-align: right;
+}
+@media only screen and (max-width: 736px) {
+  .cover-title {
+    font-size: 8vw;
+    text-align: right;
+  }
+  .cover-temp {
+    font-size: 8vw;
+    text-align: right;
+  }
+  .cover-location {
+    font-size: 3vw;
+    text-align: right;
+  }
+  .cover-time {
+    font-size: 3vw;
+    text-align: right;
+  }
 }
 .details {
   display: flex;
@@ -22,7 +87,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: blue;
+  background-color: grey;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 @media only screen and (max-width: 736px) {
   .day {
