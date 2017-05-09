@@ -8,7 +8,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const isProduction = (process.env.NODE_ENV === 'production');
 const fileNamePrefix = isProduction? '[chunkhash].' : '';
 const extractCSS = new ExtractTextPlugin({
-  filename: fileNamePrefix + 'style.css',
+  filename: fileNamePrefix + '[name].css',
   disable: !isProduction,
 });
 const extractLess = new ExtractTextPlugin({
