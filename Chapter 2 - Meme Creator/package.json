@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "webpack": "webpack",
-    "watch": "webpack-dev-server"
+    "watch": "webpack-dev-server --inline --hot"
   },
   "author": "",
   "license": "ISC",

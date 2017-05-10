@@ -1,3 +1,4 @@
+import './index';
 const deviceWidth = window.innerWidth;
 
 class Meme {

@@ -31,6 +31,7 @@ module.exports = {
       path: __dirname + "/dist",
       filename: fileNamePrefix + '[name].js',
       library: 'bundle',
+      publicPath: '/dist/',
   },
   module: {
     rules: [
