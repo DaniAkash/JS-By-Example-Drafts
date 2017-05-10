@@ -7,7 +7,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const isProduction = (process.env.NODE_ENV === 'production');
 const fileNamePrefix = isProduction? '[chunkhash].' : '';
-const extractCSS = new ExtractTextPlugin(fileNamePrefix + 'style.css');
+const extractLess = new ExtractTextPlugin({
+    filename: fileNamePrefix + "[name].css",
+    disable: !isProduction,
+});
 const pathsToClean = [
   'dist'
 ];
@@ -32,31 +35,18 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
+        test: /\.(less|css)$/,
+        use: extractLess.extract({
+          use: [
+            {
+              loader: "css-loader"
+            },
+            {
+              loader: "less-loader"
+            }
+          ],
           fallback: "style-loader",
-          use: "css-loader"
         })
-      },
-      {
-        test: /\.less$/,
-        use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader",
-            options: {
-              sourceMap: !isProduction
-            }
-          },
-          {
-            loader: "less-loader",
-            options: {
-              sourceMap: !isProduction
-            }
-          }
-        ]
       },
       {
         test: /\.(svg|eot|ttf|woff|woff2)$/,
@@ -93,7 +83,7 @@ module.exports = {
   },
   watch: !isProduction,
   plugins: [
-    extractCSS,
+    extractLess,
     new webpack.LoaderOptionsPlugin({
       minimize: isProduction,
     }),
