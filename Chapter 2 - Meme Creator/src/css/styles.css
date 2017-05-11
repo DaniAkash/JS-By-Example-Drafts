@@ -5,37 +5,30 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 .canvas-area {
-  margin: 10px;
   display: flex;
   flex: 2;
   align-items: center;
   justify-content: center;
+  margin: 10px;
 }
 .img-canvas {
   border: 1px solid #000000;
 }
 .input-area {
-  margin-right: 30px !important;
-  margin: 10px;
   display: flex;
   flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 10px;
 }
 .form-group {
   display: flex;
   width: 100%;
   flex-direction: column !important;
-}
-.dimensions {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: stretch;
-  width: 100%;
 }
 .download-button {
   margin-top: 10px;
