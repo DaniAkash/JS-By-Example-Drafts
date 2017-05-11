@@ -2,23 +2,15 @@ body {
   padding-top: 65px;
 }
 .body {
-  display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: row;
   flex-direction: row;
-  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-justify-content: space-around;
   justify-content: space-around;
 }
 .canvas-area {
-  display: -webkit-flex;
   display: flex;
-  -webkit-flex: 2;
   flex: 2;
-  -webkit-align-items: flex-start;
   align-items: center;
-  -webkit-justify-content: center;
   justify-content: center;
   margin: 10px;
 }
@@ -26,23 +18,16 @@ body {
   border: 1px solid #000000;
 }
 .input-area {
-  display: -webkit-flex;
   display: flex;
-  -webkit-flex: 1;
   flex: 1;
-  -webkit-flex-direction: column;
   flex-direction: column;
-  -webkit-align-items: center;
   align-items: center;
-  -webkit-justify-content: center;
   justify-content: center;
   margin: 10px;
 }
 .form-group {
-  display: -webkit-flex;
-  display: flex;
   width: 100%;
-  -webkit-flex-direction: column !important;
+  display: flex;
   flex-direction: column !important;
 }
 .download-button {
