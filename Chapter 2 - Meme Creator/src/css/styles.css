@@ -26,9 +26,7 @@ body {
   margin: 10px;
 }
 .form-group {
-  width: 100%;
-  display: flex;
-  flex-direction: column !important;
+  width: 90%;
 }
 .download-button {
   margin-top: 10px;
