@@ -1,11 +1,11 @@
 {
-  "name": "weather-app",
+  "name": "web-components",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "webpack": "webpack",
-    "watch": "webpack-dev-server"
+    "watch": "webpack-dev-server --inline --hot"
   },
   "author": "Dani Akash S",
   "license": "ISC",

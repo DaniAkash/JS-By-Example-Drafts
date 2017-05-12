@@ -24,8 +24,8 @@ const cleanOptions = {
 module.exports = {
   context: __dirname,
   entry: {
-    general: './src/js/index.js',
-    meme: './src/js/meme.js',
+    general: './src/js/general.js',
+    home: './src/js/home.js',
   },
   output: {
       path: __dirname + "/dist",
