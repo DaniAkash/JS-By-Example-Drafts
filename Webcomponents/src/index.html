@@ -7,7 +7,34 @@
   <title>Document</title>
 </head>
 <body>
-
+<style>
+  body {
+    margin: 0;
+  }
+  /* Style the element from the outside */
+  /*
+  fancy-tabs {
+    margin-bottom: 32px;
+    --background-color: black;
+  }*/
+</style>
+<fancy-tabs background>
+  <button slot="title">Tab 1</button>
+  <button slot="title" selected>Tab 2</button>
+  <button slot="title">Tab 3</button>
+  <section>content panel 1</section>
+  <section>content panel 2</section>
+  <section>content panel 3</section>
+</fancy-tabs>
+<!-- Using <a> instead of h2 still works! -->
+<!-- <fancy-tabs background>
+  <a slot="title">Title 1</a>
+  <a slot="title" selected>Title 2</a>
+  <a slot="title">Title 3</a>
+  <section>content panel 1</section>
+  <section>content panel 2</section>
+  <section>content panel 3</section>
+</fancy-tabs> -->
   <script src="../dist/home.js"></script>
 </body>
 </html>
