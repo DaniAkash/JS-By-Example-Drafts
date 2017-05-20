@@ -58,7 +58,7 @@ class Meme {
         let reader = new FileReader();
         let image = new Image();
 
-        reader.onload = event => {
+        reader.onload = () => {
           image.onload = () => {
 
             this.canvas.height = image.height;
