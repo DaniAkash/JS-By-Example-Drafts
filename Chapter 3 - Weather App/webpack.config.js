@@ -1,20 +1,36 @@
+/**
+ * Environment variables used in this configuration:
+ * NODE_ENV
+ * API_KEY
+ */
+
+require('dotenv').config()
 const webpack = require('webpack');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const PurifyCSSPlugin = require('purifycss-webpack');
 const glob = require('glob');
-const fs = require('fs');
+const PurifyCSSPlugin = require('purifycss-webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+/**
+ * flag Used to check if the environment is production or not
+ */
 const isProduction = (process.env.NODE_ENV === 'production');
+
+/**
+ * Include hash to filenames for cache busting - only at production
+ */
 const fileNamePrefix = isProduction? '[chunkhash].' : '';
-const extractCSS = new ExtractTextPlugin({
-  filename: fileNamePrefix + '[name].css',
-  disable: !isProduction,
-});
+
+/**
+ * An instance of ExtractTextPlugin
+ */
 const extractLess = new ExtractTextPlugin({
     filename: fileNamePrefix + "[name].css",
-    disable: !isProduction,
 });
+
+/**
+ * Options to clean dist folder
+ */
 const pathsToClean = [
   'dist'
 ];
@@ -34,30 +50,25 @@ module.exports = {
   output: {
       path: __dirname + "/dist",
       filename: fileNamePrefix + '[name].js',
-      library: 'bundle',
+      publicPath: '/dist/',
+  },
+  devServer: { // Configuration for webpack-dev-server
+    compress: true,
+    port: 8080,
+    hot: true,
   },
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: extractCSS.extract({
-          fallback: "style-loader",
-          use: "css-loader",
-        })
-      },
-      {
-        test: /\.less$/,
-        use: extractLess.extract({
-          use: [
-            {
-              loader: "css-loader"
-            },
-            {
-              loader: "less-loader"
-            }
-          ],
-          fallback: "style-loader",
-        })
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['env', 'es2015'],
+            plugins: ['transform-custom-element-classes']
+          }
+        }
       },
       {
         test: /\.(svg|eot|ttf|woff|woff2)$/,
@@ -77,55 +88,90 @@ module.exports = {
               name: 'images/[name].[ext]'
             }
           },
-          'img-loader'
+          'img-loader' // optional image compression remove this if img-loader binary build fails in your OS
         ],
       },
       {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['env', 'es2015']
-          }
-        }
-      }
-    ]
+        test: /\.(less|css)$/,
+        use:
+        isProduction
+        ?
+          extractLess.extract({ // Use the instance of ExtractTextPlugin for CSS files
+            use: [
+              {
+                loader: 'css-loader',
+                options: {
+                  sourceMap: true
+                }
+              },
+              {
+                loader: 'less-loader',
+                options: {
+                  sourceMap: true
+                }
+              }
+            ],
+            fallback: 'style-loader',
+          })
+        :
+          [
+            {
+              loader: 'style-loader'
+            },
+            {
+              loader: "css-loader"
+            },
+            {
+              loader: "less-loader"
+            }
+          ]
+      },
+    ],
   },
-  watch: !isProduction,
+  devtool: 'source-map',
   plugins: [
-    extractCSS,
-    extractLess,
-    new webpack.LoaderOptionsPlugin({
-      minimize: isProduction,
-    }),
-    new PurifyCSSPlugin({
-      paths: glob.sync(__dirname + '/*.html'),
-      minimize: isProduction,
-    }),
     new webpack.ProvidePlugin({
       jQuery: 'jquery',
       $: 'jquery',
       jquery: 'jquery'
     }),
-    new CleanWebpackPlugin(pathsToClean, cleanOptions),
+    new webpack.DefinePlugin({ // Remove this plugin if you don't plan to define any global constants
+      API_KEY: JSON.stringify(process.env.API_KEY),
+    }),
+    extractLess, // Make sure ExtractTextPlugin instance is included in array before the PurifyCSSPlugin
+    // new PurifyCSSPlugin({
+    //   paths: glob.sync(__dirname + '/*.html'),
+    //   minimize: true,
+    // }),
   ],
-  devtool: !isProduction?'source-map':'',
 };
 
-if(isProduction) {
+
+/**
+ * Non-Production plugins
+ */
+if(!isProduction) {
   module.exports.plugins.push(
-    new webpack.optimize.UglifyJsPlugin(),
-    function() {
-      this.plugin("done", function(status) {
-        require("fs").writeFileSync(
-          __dirname + "/dist/config.json",
-          JSON.stringify(status.toJson().assetsByChunkName));
-      });
-    }
+    new webpack.HotModuleReplacementPlugin() // HMR plugin will cause problems with [chunkhash]
   );
 }
 
 /**
- * Ubuntu - https://packages.debian.org/jessie/amd64/libpng12-0/download
+ * Production only plugins
  */
+if(isProduction) {
+  module.exports.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true // use false if you want to disable source maps in production
+    }),
+    function() { // Create a manifest.json file that contain the hashed file names of generated static resources
+      this.plugin("done", function(status) {
+        require("fs").writeFileSync(
+          __dirname + "/dist/manifest.json",
+          JSON.stringify(status.toJson().assetsByChunkName)
+        );
+      });
+    },
+    new CleanWebpackPlugin(pathsToClean, cleanOptions)
+  );
+}
