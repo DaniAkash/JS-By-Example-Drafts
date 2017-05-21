@@ -22,3 +22,11 @@ function showPosition(position) {
 function errorPosition(error) {
   console.log(error, 'unable to get position');
 }
+
+var skycons = new Skycons({"color": "black"});
+
+skycons.add("coverIcon", Skycons.CLEAR_DAY);
+
+skycons.add("dayIcon", Skycons.CLEAR_DAY);
+
+skycons.play();

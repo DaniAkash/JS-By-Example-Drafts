@@ -11,15 +11,11 @@
   margin: 10px;
   border-radius: 15px;
   display: flex;
+  height: 50vh;
 }
 @media only screen and (max-width: 736px) {
   .cover {
-    height: 30vh;
-  }
-}
-@media only screen and (min-width: 737px) {
-  .cover {
-    height: 50vh;
+    height: 35vh;
   }
 }
 .cover-image {
@@ -37,7 +33,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 2vw;
 }
 .title-area {
@@ -45,17 +41,9 @@
 }
 .details-area {
   width: 45vw;
+  text-align: right;
 }
 .cover-title {
-  text-align: right;
-}
-.cover-temp {
-  text-align: right;
-}
-.cover-location {
-  text-align: right;
-}
-.cover-time {
   text-align: right;
 }
 @media only screen and (max-width: 736px) {
@@ -63,41 +51,91 @@
     font-size: 8vw;
     text-align: right;
   }
+  .details-area {
+    font-size: 3vw;
+    text-align: right;
+  }
   .cover-temp {
     font-size: 8vw;
-    text-align: right;
-  }
-  .cover-location {
-    font-size: 3vw;
-    text-align: right;
-  }
-  .cover-time {
-    font-size: 3vw;
-    text-align: right;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Details box
+ */
 .details {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
   width: 90vw;
 }
 .day {
-  padding: 10px;
+  width: 20vw;
+}
+.day {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   background-color: grey;
   border-radius: 5px;
   margin-bottom: 10px;
 }
-@media only screen and (max-width: 736px) {
-  .day {
-    width: 90vw !important;
-  }
+.day-icon {
+  max-width: 20vw;
+}
+.day-image {
+  flex: 1;
+  align-self: center;
+}
+.day-details {
+  flex: 2;
+  text-align: center;
 }
 @media only screen and (min-width: 737px) {
+  .day-location {
+    display: none;
+  }
+  .day-summary {
+    display: none;
+  }
+}
+@media only screen and (max-width: 736px) {
   .day {
-    width: 22.5vw;
+    flex-direction: row;
+    width: 90vw;
+    height: 35vh;
+  }
+  .day-icon {
+    max-height: 40vh;
+    max-width: 40vw;
+  }
+  .day-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 30vh;
+    text-align: right;
+    font-size: 3vw;
+    margin: 2vw;
+  }
+  .day-cover-title {
+    font-size: 8vw;
+  }
+  .day-temp {
+    font-size: 8vw;
   }
 }

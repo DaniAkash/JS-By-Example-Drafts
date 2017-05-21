@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Weather Application</title>
-    <!--<link rel="stylesheet" href="style.css">-->
+    <!--<link rel="stylesheet" href="dist/home.css">-->
 </head>
 <body>
   <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -33,7 +33,7 @@
   <div class="container contents">
     <div class="cover">
       <div class="cover-image">
-        <img src="./src/assets/icons/sunny.png" class="cover-icon">
+        <canvas id="coverIcon" class="cover-icon"></canvas>
       </div>
       <div class="cover-details">
         <div class="title-area">
@@ -42,13 +42,27 @@
         <div class="details-area">
           <h1 class="cover-temp">25° C</h1>
           <p class="cover-location">Chennai</p>
-          <p class="cover-time">25-07-2017 5:15pm</p>
+          <p class="cover-summary">Drizzle starting this evening.</p>
+          <p class="cover-time">Sunday, Jul 12.</p>
         </div>
       </div>
     </div>
     <div class="details">
       <div class="day">
-        Day two
+        <div class="day-image">
+          <canvas id="dayIcon" class="day-icon"></canvas>
+        </div>
+        <div class="day-details">
+          <div class="day-title-area">
+            <h1 class="day-cover-title">Sunny</h1>
+          </div>
+          <div class="day-detail-area">
+            <h1 class="day-temp">25° C</h1>
+            <p class="day-location">Chennai</p>
+            <p class="day-summary">Drizzle starting this evening.</p>
+            <p class="day-time">Monday, Jul 13.</p>
+          </div>
+        </div>
       </div>
       <div class="day">
         Day three
@@ -61,6 +75,7 @@
       </div>
     </div>
   </div>
-  <script src="home.js"></script>
+  <div class="collapsed" style="display: none;"></div>
+  <script src="dist/home.js"></script>
 </body>
 </html>
