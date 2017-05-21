@@ -13,3 +13,8 @@ import 'bootstrap';
  * Web Component Polyfill
  */
 import 'webcomponents.js';
+
+/**
+ * Skycons
+ */
+import './skycons';
