@@ -1,7 +1,9 @@
 import './general';
+import Cover from './CustomElements/cover';
 
 window.addEventListener('WebComponentsReady', function(e) {
   // imports are loaded and elements have been registered
+  window.customElements.define("x-cover", Cover);
   console.log('Components are ready');
 });
 
