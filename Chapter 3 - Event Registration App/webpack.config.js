@@ -1,7 +1,6 @@
 /**
  * Environment variables used in this configuration:
  * NODE_ENV
- * API_KEY
  */
 
 require('dotenv').config()
@@ -116,13 +115,22 @@ module.exports = {
         :
           [
             {
-              loader: 'style-loader'
+              loader: 'style-loader',
+              options: {
+                sourceMap: true
+              }
             },
             {
-              loader: "css-loader"
+              loader: "css-loader",
+              options: {
+                sourceMap: true
+              }
             },
             {
-              loader: "less-loader"
+              loader: "less-loader",
+              options: {
+                sourceMap: true
+              }
             }
           ]
       },
@@ -136,7 +144,7 @@ module.exports = {
       jquery: 'jquery'
     }),
     new webpack.DefinePlugin({ // Remove this plugin if you don't plan to define any global constants
-      API_KEY: JSON.stringify(process.env.API_KEY),
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
     }),
     extractLess, // Make sure ExtractTextPlugin instance is included in array before the PurifyCSSPlugin
     // new PurifyCSSPlugin({
