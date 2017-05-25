@@ -1,9 +1,12 @@
 import './general';
 import Cover from './CustomElements/cover';
+import Day from './CustomElements/day';
+import apiCall from './Helpers/apiCall';
 
 window.addEventListener('WebComponentsReady', function(e) {
   // imports are loaded and elements have been registered
-  window.customElements.define("x-cover", Cover);
+  window.customElements.define('x-cover', Cover);
+  window.customElements.define('x-day', Day);
   console.log('Components are ready');
 });
 
@@ -20,6 +23,7 @@ function getLocation() {
 }
 function showPosition(position) {
   console.log(position.coords.latitude, position.coords.longitude);
+  console.log(apiCall(`${position.coords.latitude},${position.coords.longitude}`));
 }
 function errorPosition(error) {
   console.log(error, 'unable to get position');
