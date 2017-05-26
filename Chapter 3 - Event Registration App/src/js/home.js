@@ -1,6 +1,6 @@
 import './general';
 import validateRegistrationForm from './services/formValidation/registrationForm';
-import registrationApi from './services/mockApis/registration';
+import registrationApi from './services/apiCalls/registration';
 
 class Home {
 
@@ -39,27 +39,27 @@ class Home {
     const formValues = this.getValues();
     const formStatus = validateRegistrationForm(formValues);
 
-    if(formStatus.isValid) {
-      this.clearErrors();
-      this.submitForm(formValues);
-    } else {
-      this.clearErrors();
-      this.highlightErrors(formStatus.result);
-    }
+    this.submitForm(formValues);
+    // if(formStatus.isValid) {
+    //   this.clearErrors();
+    // } else {
+    //   this.clearErrors();
+    //   this.highlightErrors(formStatus.result);
+    // }
   }
 
   submitForm(formValues) {
-    this.$submit.classList.add('hidden');
-    this.$loadingIndicator.classList.remove('hidden');
+    // this.$submit.classList.add('hidden');
+    // this.$loadingIndicator.classList.remove('hidden');
     registrationApi(formValues)
-    .then(() => {
-      this.$submit.classList.remove('hidden');
-      this.$loadingIndicator.classList.add('hidden');
-      alert('form submitted');
+    .then((result) => {
+      // this.$submit.classList.remove('hidden');
+      // this.$loadingIndicator.classList.add('hidden');
+      console.log(result);
     })
     .catch(() => {
-      this.$submit.classList.remove('hidden');
-      this.$loadingIndicator.classList.add('hidden');
+      // this.$submit.classList.remove('hidden');
+      // this.$loadingIndicator.classList.add('hidden');
       alert('Error');
     });
   }

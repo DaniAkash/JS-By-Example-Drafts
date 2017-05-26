@@ -3,10 +3,16 @@ const express = require('express'),
 
 const app = express();
 app.use(bodyParser.json());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.set('port', 3000);
 
 app.post('/registration', (req, res, next) => {
+  console.log(req.body);
   let each;
   for(each in req.body) {
     if(!req.body[each]) {
