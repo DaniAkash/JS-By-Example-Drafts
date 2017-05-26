@@ -18,3 +18,10 @@ body {
     min-width: 90vw;
   }
 }
+.loading-indicator {
+  max-height: 50px;
+  max-width: 50px;
+}
+.hidden {
+  display: none;
+}

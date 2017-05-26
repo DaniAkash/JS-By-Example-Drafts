@@ -1,5 +1,6 @@
 import './general';
 import validateRegistrationForm from './services/formValidation/registrationForm';
+import registrationApi from './services/mockApis/registration';
 
 class Home {
 
@@ -12,6 +13,8 @@ class Home {
     this.$profession = document.querySelector('#profession');
     this.$experience = document.querySelector('#experience');
     this.$comment = document.querySelector('#comment');
+    this.$submit = document.querySelector('#submit');
+    this.$loadingIndicator = document.querySelector('#loadingIndicator');
 
     this.$form.addEventListener('submit', (event) => {
       this.onFormSubmit(event);
@@ -36,8 +39,6 @@ class Home {
     const formValues = this.getValues();
     const formStatus = validateRegistrationForm(formValues);
 
-    console.log(formStatus);
-
     if(formStatus.isValid) {
       this.clearErrors();
       this.submitForm(formValues);
@@ -48,7 +49,19 @@ class Home {
   }
 
   submitForm(formValues) {
-
+    this.$submit.classList.add('hidden');
+    this.$loadingIndicator.classList.remove('hidden');
+    registrationApi(formValues)
+    .then(() => {
+      this.$submit.classList.remove('hidden');
+      this.$loadingIndicator.classList.add('hidden');
+      alert('form submitted');
+    })
+    .catch(() => {
+      this.$submit.classList.remove('hidden');
+      this.$loadingIndicator.classList.add('hidden');
+      alert('Error');
+    });
   }
 
   highlightErrors(result) {
