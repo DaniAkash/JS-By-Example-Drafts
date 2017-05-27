@@ -116,13 +116,22 @@ module.exports = {
         :
           [
             {
-              loader: 'style-loader'
+              loader: 'style-loader',
+              options: {
+                sourceMap: true
+              }
             },
             {
-              loader: "css-loader"
+              loader: "css-loader",
+              options: {
+                sourceMap: true
+              }
             },
             {
-              loader: "less-loader"
+              loader: "less-loader",
+              options: {
+                sourceMap: true
+              }
             }
           ]
       },
@@ -138,7 +147,7 @@ module.exports = {
     new webpack.DefinePlugin({ // Remove this plugin if you don't plan to define any global constants
       API_KEY: JSON.stringify(process.env.API_KEY),
     }),
-    extractLess, // Make sure ExtractTextPlugin instance is included in array before the PurifyCSSPlugin
+    // extractLess, // Make sure ExtractTextPlugin instance is included in array before the PurifyCSSPlugin
     // new PurifyCSSPlugin({
     //   paths: glob.sync(__dirname + '/*.html'),
     //   minimize: true,
