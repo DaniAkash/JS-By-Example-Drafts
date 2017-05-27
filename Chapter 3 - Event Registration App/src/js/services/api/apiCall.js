@@ -14,14 +14,23 @@ export default function apiCall(route, body = {}, method='POST') {
       body: JSON.stringify(body),
     };
 
+    function handleErrors(response) {
+      if(response.status === 200) {
+        return response.json();
+      } else {
+        throw Error(response.statusText);
+      }
+    }
+
     fetch(`${SERVER_URL}/${route}`, requestDetails)
-      .then(response => response.json())
+      .then(handleErrors)
       .then(data => resolve(data))
       .catch(err => reject(err));
+
   });
 
   const timeout = new Promise((request, reject) => {
-    setTimeout(reject, timeoutDuration, {error: `Request timed out!`});
+    setTimeout(reject, timeoutDuration, `Request timed out!`);
   });
 
   return new Promise((resolve, reject) => {
