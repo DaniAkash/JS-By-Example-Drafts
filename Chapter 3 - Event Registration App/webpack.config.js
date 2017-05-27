@@ -45,11 +45,13 @@ module.exports = {
   entry: {
     home: './src/js/home.js',
     status: './src/js/status.js',
+    about: './src/js/about.js',
   },
   output: {
       path: __dirname + "/dist",
       filename: fileNamePrefix + '[name].js',
       publicPath: '/dist/',
+      library: 'bundle'
   },
   devServer: { // Configuration for webpack-dev-server
     compress: true,
@@ -146,6 +148,7 @@ module.exports = {
     new webpack.DefinePlugin({ // Remove this plugin if you don't plan to define any global constants
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       SERVER_URL: JSON.stringify(process.env.SERVER_URL),
+      GMAP_KEY: JSON.stringify(process.env.GMAP_KEY),
     }),
     extractLess, // Make sure ExtractTextPlugin instance is included in array before the PurifyCSSPlugin
     // new PurifyCSSPlugin({

@@ -27,12 +27,6 @@ export default function apiCall(route, body = {}, method='POST') {
       .then(handleErrors)
       .then(data => resolve(data))
       .catch(err => reject(err));
-    // fetch('http://localhost:3000/statistics', {
-    //   method: 'GET',
-    //   mode: 'cors',
-    //   headers,
-    //   // body: JSON.stringify(body)
-    // }).then(res=>res.json()).then(res => console.log(res))
 
   });
 
