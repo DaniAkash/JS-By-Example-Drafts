@@ -12,7 +12,6 @@ app.use(function(req, res, next) {
 app.set('port', 3000);
 
 app.post('/registration', (req, res, next) => {
-  console.log(req.body);
   let each;
   for(each in req.body) {
     if(!req.body[each]) {
@@ -20,7 +19,9 @@ app.post('/registration', (req, res, next) => {
       return next();
     }
   }
-  res.status(200).json({message: `${req.body.username} is Registered Successfully`});
+  setTimeout(() => {
+    res.status(200).json({message: `${req.body.username} is Registered Successfully`});
+  }, 3000);
 });
 
 const http = require('http').Server(app);
