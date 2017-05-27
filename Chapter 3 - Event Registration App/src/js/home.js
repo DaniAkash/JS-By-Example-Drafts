@@ -35,7 +35,7 @@ class Home {
     };
   }
 
-  onFormSubmit() {
+  onFormSubmit(event) {
     event.preventDefault();
 
     const formValues = this.getValues();
