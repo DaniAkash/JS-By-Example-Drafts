@@ -1,6 +1,6 @@
 const timeoutDuration = 5000;
 
-export default function registration(formData) {
+export default function apiCall(route, body = {}, method='POST') {
   const request = new Promise((resolve, reject) => {
 
     const headers = new Headers({
@@ -8,20 +8,20 @@ export default function registration(formData) {
     });
 
     const requestDetails = {
-      method: 'POST',
+      method,
       mode: 'cors',
       headers,
-      body: JSON.stringify(formData),
+      body: JSON.stringify(body),
     };
 
-    fetch(`${SERVER_URL}/registration`, requestDetails)
+    fetch(`${SERVER_URL}/${route}`, requestDetails)
       .then(response => response.json())
       .then(data => resolve(data))
       .catch(err => reject(err));
   });
 
   const timeout = new Promise((request, reject) => {
-    setTimeout(reject, timeoutDuration, `Request timed out!`);
+    setTimeout(reject, timeoutDuration, {error: `Request timed out!`});
   });
 
   return new Promise((resolve, reject) => {
