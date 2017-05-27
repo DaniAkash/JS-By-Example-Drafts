@@ -11,8 +11,9 @@ export default function apiCall(route, body = {}, method='POST') {
       method,
       mode: 'cors',
       headers,
-      body: JSON.stringify(body),
     };
+
+    if(method !== 'GET') requestDetails.body = JSON.stringify(body);
 
     function handleErrors(response) {
       if(response.status === 200) {
@@ -26,6 +27,12 @@ export default function apiCall(route, body = {}, method='POST') {
       .then(handleErrors)
       .then(data => resolve(data))
       .catch(err => reject(err));
+    // fetch('http://localhost:3000/statistics', {
+    //   method: 'GET',
+    //   mode: 'cors',
+    //   headers,
+    //   // body: JSON.stringify(body)
+    // }).then(res=>res.json()).then(res => console.log(res))
 
   });
 

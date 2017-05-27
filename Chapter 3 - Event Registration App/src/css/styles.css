@@ -25,3 +25,7 @@ body {
 .hidden {
   display: none;
 }
+.chart-area {
+  margin: 25px;
+  max-width: 600px;
+}
