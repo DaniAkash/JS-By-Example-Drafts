@@ -16,7 +16,7 @@ export default function apiCall(route, body = {}, method='POST') {
     if(method !== 'GET') requestDetails.body = JSON.stringify(body);
 
     function handleErrors(response) {
-      if(response.status === 200) {
+      if(response.ok) {
         return response.json();
       } else {
         throw Error(response.statusText);

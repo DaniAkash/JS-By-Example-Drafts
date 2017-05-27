@@ -29,14 +29,20 @@
     </div>
   </nav>
   <div class="container">
-    <h1 class="title">Interested People based on</h1>
-    <ul class="nav nav-tabs">
-      <li role="presentation" class="active"><a href="#" id="expTab">Experience</a></li>
-      <li role="presentation"><a href="#" id="profTab">Profession</a></li>
-      <li role="presentation"><a href="#" id="ageTab">Age</a></li>
+    <h1 class="title">Interested People</h1>
+    <div id="loadingIndicator">
+      <p>Data loading...</p>
+      <image src="./src/assets/images/loading.gif" class="loading-indicator"></image>
+    </div>
+    <ul class="nav nav-tabs hidden" id="tabArea">
+      <li role="presentation" class="active"><a href="" id="experienceTab">Experience</a></li>
+      <li role="presentation"><a href="" id="professionTab">Profession</a></li>
+      <li role="presentation"><a href="" id="ageTab">Age</a></li>
     </ul>
-    <div class="chart-area">
-      <canvas id="chart"></canvas>
+    <div class="chart-area hidden" id="chartArea">
+      <canvas id="experienceChart"></canvas>
+      <canvas id="professionChart"></canvas>
+      <canvas id="ageChart"></canvas>
     </div>
   </div>
   <script src="dist/status.js"></script>
