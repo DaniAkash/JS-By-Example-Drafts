@@ -9,9 +9,10 @@
   },
   "author": "Dani Akash S",
   "license": "ISC",
-    "dependencies": {
+  "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.1",
+    "toastr": "^2.1.2",
     "webcomponents.js": "^0.7.24"
   },
   "devDependencies": {

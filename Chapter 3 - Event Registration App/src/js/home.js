@@ -1,6 +1,8 @@
+import toastr from 'toastr';
+
 import './general';
 import validateRegistrationForm from './services/formValidation/registrationForm';
-import registrationApi from './services/apiCalls/registration';
+import apiCall from './services/api/apiCall';
 
 class Home {
 
@@ -39,28 +41,28 @@ class Home {
     const formValues = this.getValues();
     const formStatus = validateRegistrationForm(formValues);
 
-    this.submitForm(formValues);
-    // if(formStatus.isValid) {
-    //   this.clearErrors();
-    // } else {
-    //   this.clearErrors();
-    //   this.highlightErrors(formStatus.result);
-    // }
+    if(formStatus.isValid) {
+      this.clearErrors();
+      this.submitForm(formValues);
+    } else {
+      this.clearErrors();
+      this.highlightErrors(formStatus.result);
+    }
   }
 
   submitForm(formValues) {
-    // this.$submit.classList.add('hidden');
-    // this.$loadingIndicator.classList.remove('hidden');
-    registrationApi(formValues)
-    .then((result) => {
-      // this.$submit.classList.remove('hidden');
-      // this.$loadingIndicator.classList.add('hidden');
-      console.log(result);
+    this.$submit.classList.add('hidden');
+    this.$loadingIndicator.classList.remove('hidden');
+    apiCall('registration', formValues)
+    .then(response => {
+      this.$submit.classList.remove('hidden');
+      this.$loadingIndicator.classList.add('hidden');
+      toastr.success(response.message);
     })
     .catch(() => {
-      // this.$submit.classList.remove('hidden');
-      // this.$loadingIndicator.classList.add('hidden');
-      alert('Error');
+      this.$submit.classList.remove('hidden');
+      this.$loadingIndicator.classList.add('hidden');
+      toastr.error('Error!');
     });
   }
 
