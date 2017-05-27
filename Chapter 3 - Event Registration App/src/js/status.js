@@ -20,6 +20,13 @@ class Status {
     this.statisticData;
 
     this.loadData();
+    this.addEventListeners();
+  }
+
+  addEventListeners() {
+    this.$experienceTab.addEventListener('click', this.loadExperience.bind(this));
+    this.$professionTab.addEventListener('click', this.loadProfession.bind(this));
+    this.$ageTab.addEventListener('click', this.loadAge.bind(this));
   }
 
   loadData() {
@@ -30,8 +37,6 @@ class Status {
         this.$loadingIndicator.classList.add('hidden');
         this.$tabArea.classList.remove('hidden');
         this.$chartArea.classList.remove('hidden');
-        this.loadAge();
-        this.loadProfession();
         this.loadExperience();
       })
       .catch(() => {
@@ -39,14 +44,19 @@ class Status {
   }
 
   hideCharts() {
+    this.$experienceTab.parentElement.classList.remove('active');
+    this.$professionTab.parentElement.classList.remove('active');
+    this.$ageTab.parentElement.classList.remove('active');
     this.$ageCanvas.classList.add('hidden');
     this.$professionCanvas.classList.add('hidden');
     this.$experienceCanvas.classList.add('hidden');
   }
 
-  loadExperience() {
+  loadExperience(event) {
+    if(event) event.preventDefault();
     this.hideCharts();
     this.$experienceCanvas.classList.remove('hidden');
+    this.$experienceTab.parentElement.classList.add('active');
     const data = {
         datasets: [{
             label: 'in Years',
@@ -74,9 +84,11 @@ class Status {
     });
   }
 
-  loadProfession() {
+  loadProfession(event) {
+    if(event) event.preventDefault();
     this.hideCharts();
     this.$professionCanvas.classList.remove('hidden');
+    this.$professionTab.parentElement.classList.add('active');
     const data = {
         datasets: [{
             label: 'in Years',
@@ -107,9 +119,11 @@ class Status {
     });
   }
 
-  loadAge() {
+  loadAge(event) {
+    if(event) event.preventDefault();
     this.hideCharts();
     this.$ageCanvas.classList.remove('hidden');
+    this.$ageTab.parentElement.classList.add('active');
     const data = {
         datasets: [{
             label: 'in Years',
