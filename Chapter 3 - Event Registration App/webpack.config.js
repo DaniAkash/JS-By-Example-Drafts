@@ -3,10 +3,10 @@
  * NODE_ENV
  */
 
-require('dotenv').config()
+require('dotenv').config();
 const webpack = require('webpack');
-const glob = require('glob');
-const PurifyCSSPlugin = require('purifycss-webpack');
+const glob = require('glob-all');
+// const PurifyCSSPlugin = require('purifycss-webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -112,7 +112,12 @@ module.exports = {
                 }
               }
             ],
-            fallback: 'style-loader',
+            fallback: {
+              loader: 'style-loader',
+              options: {
+                sourceMap: true
+              }
+            },
           })
         :
           [
@@ -150,11 +155,6 @@ module.exports = {
       SERVER_URL: JSON.stringify(process.env.SERVER_URL),
       GMAP_KEY: JSON.stringify(process.env.GMAP_KEY),
     }),
-    extractLess, // Make sure ExtractTextPlugin instance is included in array before the PurifyCSSPlugin
-    // new PurifyCSSPlugin({
-    //   paths: glob.sync(__dirname + '/*.html'),
-    //   minimize: true,
-    // }),
   ],
 };
 
@@ -176,6 +176,16 @@ if(isProduction) {
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true // use false if you want to disable source maps in production
     }),
+    extractLess, // Make sure ExtractTextPlugin instance is included in array before the PurifyCSSPlugin
+    // new PurifyCSSPlugin({ // PurifyCSSPlugin disabled since it causes problems with bootstrap animation & toastr
+    //   paths: glob.sync([
+    //     __dirname + '/*.html',
+    //     __dirname + '/node_modules/jquery/dist/*.js',
+    //     __dirname + './node_modules/bootstrap/dist/js/*.js',
+    //     __dirname + './node_modules/toastr/toastr.js'
+    //   ]),
+    //   minimize: true,
+    // }),
     function() { // Create a manifest.json file that contain the hashed file names of generated static resources
       this.plugin("done", function(status) {
         require("fs").writeFileSync(
