@@ -30,7 +30,7 @@ class Home {
       phone: this.$phone.value,
       age: this.$age.value,
       profession: this.$profession.value,
-      experience: this.$experience.value,
+      experience: document.querySelector('input[name="experience"]:checked').value,
       comment: this.$comment.value,
     };
   }
@@ -54,16 +54,16 @@ class Home {
     this.$submit.classList.add('hidden');
     this.$loadingIndicator.classList.remove('hidden');
     apiCall('registration', formValues)
-    .then(response => {
-      this.$submit.classList.remove('hidden');
-      this.$loadingIndicator.classList.add('hidden');
-      toastr.success(response.message);
-    })
-    .catch(() => {
-      this.$submit.classList.remove('hidden');
-      this.$loadingIndicator.classList.add('hidden');
-      toastr.error('Error!');
-    });
+      .then(response => {
+        this.$submit.classList.remove('hidden');
+        this.$loadingIndicator.classList.add('hidden');
+        toastr.success(response.message);
+      })
+      .catch(() => {
+        this.$submit.classList.remove('hidden');
+        this.$loadingIndicator.classList.add('hidden');
+        toastr.error('Error!');
+      });
   }
 
   highlightErrors(result) {
