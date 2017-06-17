@@ -1,0 +1,61 @@
+body {
+  padding-top: 65px;
+}
+.input-area {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.room-input {
+  width: 500px;
+  margin: 20px;
+}
+@media only screen and (max-width: 736px) {
+  .room-input {
+    max-width: 500px;
+  }
+}
+.create-room-button {
+  margin: 20px;
+}
+.video-area {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 25vh;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.my-video {
+  max-width: 25vw;
+  min-width: 200px;
+  border: 1px solid blue;
+  height: 25vh;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.my-video-player {
+  max-height: 100%;
+  max-width: 100%;
+}
+.my-video-volume {
+  position: absolute;
+}
+.others-video {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.guest-video {
+  max-width: 25vw;
+  min-width: 200px;
+  border: 1px solid red;
+  height: 25vh;
+  margin-right: 10px;
+  margin-left: 10px;
+}
