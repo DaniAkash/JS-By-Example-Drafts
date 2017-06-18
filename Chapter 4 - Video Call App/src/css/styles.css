@@ -24,7 +24,7 @@ body {
   left: 0;
   width: 100vw;
   height: 25vh;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   display: flex;
   flex-direction: row;
   overflow-x: auto;
@@ -33,7 +33,7 @@ body {
 .my-video {
   max-width: 25vw;
   min-width: 200px;
-  border: 1px solid blue;
+  /*border: 1px solid blue;*/
   height: 25vh;
   margin-right: 10px;
   margin-left: 10px;
@@ -45,17 +45,40 @@ body {
 .my-video-volume {
   position: absolute;
 }
-.others-video {
+.remote-videos {
   display: flex;
   flex-direction: row;
   overflow-x: auto;
   overflow-y: hidden;
 }
-.guest-video {
+.remote-video-player {
+  max-height: 100%;
+  max-width: 100%;
+}
+.remote-video {
   max-width: 25vw;
   min-width: 200px;
-  border: 1px solid red;
+  /*border: 1px solid red;*/
   height: 25vh;
   margin-right: 10px;
+  margin-left: 10px;
+}
+.room-text {
+  min-width: 400px;
+  max-width: 50vw;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+}
+.room-url {
+  padding: 10px;
+}
+.copy {
+  margin-left: 10px;
+}
+.copied {
   margin-left: 10px;
 }
