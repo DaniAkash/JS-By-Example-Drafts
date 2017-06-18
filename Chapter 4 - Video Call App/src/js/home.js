@@ -40,6 +40,8 @@ webrtc.on('readyToCall', function () {
 });
 
 webrtc.on('videoAdded', ($video, peer) => {
+  console.warn('video Added');
+
   const $remotes = document.querySelector('.remote-videos');
 
   const $container = document.createElement('div');
@@ -54,16 +56,6 @@ webrtc.on('videoAdded', ($video, peer) => {
       $container.style.width = $video.videoWidth + 'px';
       $container.style.height = $video.videoHeight + 'px';
   };
-
-  // show the remote volume
-  const $vol = document.createElement('meter');
-  $vol.id = 'volume_' + peer.id;
-  $vol.className = 'volume';
-  $vol.min = -45;
-  $vol.max = -20;
-  $vol.low = -40;
-  $vol.high = -25;
-  $container.appendChild($vol);
 
   $remotes.appendChild($container);
 });
@@ -94,20 +86,4 @@ $buttonArea.addEventListener('mouseout', (event) => {
   }
   $copy.classList.add('hidden');
   $copied.classList.add('hidden');
-});
-
-function showVolume(el, volume) {
-    if (!el) return;
-    if (volume < -45) volume = -45; // -45 to -20 is
-    if (volume > -20) volume = -20; // a good range
-    el.value = volume;
-}
-
-// local volume has changed
-webrtc.on('volumeChange', function (volume, treshold) {
-    showVolume(document.getElementById('localVolume'), volume);
-});
-// remote volume has changed
-webrtc.on('remoteVolumeChange', function (peer, volume) {
-    showVolume(document.getElementById('volume_' + peer.id), volume);
 });

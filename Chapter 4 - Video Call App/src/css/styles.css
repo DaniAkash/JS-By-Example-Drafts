@@ -24,16 +24,15 @@ body {
   left: 0;
   width: 100vw;
   height: 25vh;
-  /*border: 1px solid black;*/
   display: flex;
   flex-direction: row;
   overflow-x: auto;
   overflow-y: hidden;
+  flex-wrap: wrap-reverse;
 }
 .my-video {
   max-width: 25vw;
   min-width: 200px;
-  /*border: 1px solid blue;*/
   height: 25vh;
   margin-right: 10px;
   margin-left: 10px;
@@ -47,9 +46,13 @@ body {
 }
 .remote-videos {
   display: flex;
+  flex: 1;
   flex-direction: row;
   overflow-x: auto;
   overflow-y: hidden;
+  min-width: 200px;
+  max-width: 100vw;
+  /*background-color: blue;*/
 }
 .remote-video-player {
   max-height: 100%;
@@ -58,10 +61,10 @@ body {
 .remote-video {
   max-width: 25vw;
   min-width: 200px;
-  /*border: 1px solid red;*/
   height: 25vh;
   margin-right: 10px;
   margin-left: 10px;
+  /*background-color: red;*/
 }
 .room-text {
   min-width: 400px;
@@ -81,4 +84,9 @@ body {
 }
 .copied {
   margin-left: 10px;
+}
+.volume {
+  z-index: 1000;
+  position: absolute;
+  bottom: 20px;
 }
