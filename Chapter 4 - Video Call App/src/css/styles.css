@@ -18,6 +18,11 @@ body {
 .create-room-button {
   margin: 20px;
 }
+.primary-video {
+  max-height: 500px;
+  max-width: 500px;
+  border: 1px solid black;
+}
 .video-area {
   position: absolute;
   bottom: 0;

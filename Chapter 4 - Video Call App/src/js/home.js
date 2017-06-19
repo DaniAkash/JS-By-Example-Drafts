@@ -15,9 +15,14 @@ const webrtc = new SimpleWebRTC({
 
 class Home {
 
-  set joinRoom(room) {
+  set room(room) {
     webrtc.joinRoom(room);
+    this.roomName = room;
     this.roomCreated(room);
+  }
+
+  get room() {
+    return this.roomName;
   }
 
   constructor() {
@@ -140,9 +145,9 @@ class Home {
   }
 
   removeRemoteVideo($video, peer) {
-    const $removedVideo = document.getElementById(peer ? 'container_' + webrtc.getDomId(peer) : 'localScreenContainer');
+    const $removedVideo = document.getElementById(peer ? 'container_' + webrtc.getDomId(peer) : 'no-video-found');
     if ($removedVideo) {
-        this.$remotes.removeChild($removedVideo);
+      this.$remotes.removeChild($removedVideo);
     }
   }
 
@@ -151,8 +156,8 @@ class Home {
 const home = new Home();
 
 webrtc.on('readyToCall', () => {
-    const room = location.search && location.search.split('?')[1];
-    if (room) home.joinRoom = room;
+  const room = location.search && location.search.split('?')[1];
+  if (room) home.room = room;
 });
 
 webrtc.on('videoAdded', ($video, peer) => home.addRemoteVideo($video, peer));
