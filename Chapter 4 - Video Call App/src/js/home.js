@@ -39,7 +39,8 @@ class Home {
     this.$copy = document.querySelector('.copy');
     this.$copied = document.querySelector('.copied');
 
-    this.$remotes = document.querySelector('.remote-videos');
+    this.$remotes = document.querySelector('.video-area');
+    this.$localVideo = document.querySelector('#localVideo');
 
     this.addEventListeners();
     this.registerClicks();
@@ -70,6 +71,12 @@ class Home {
     this.$copied.addEventListener('click', () => {
       this.$copied.classList.remove('hidden');
     });
+
+    this.$localVideo.onclick = () => {
+      this.clearSelected();
+      this.$localVideo.parentElement.classList.add('container-selected');
+      this.$localVideo.classList.add('video-selected');
+    };
 
   }
 
@@ -127,16 +134,28 @@ class Home {
     this.$roomUrl.textContent = window.location.href;
   }
 
+  clearSelected() {
+    let $selectedVideo = document.querySelector('.video-selected');
+    if($selectedVideo) {
+      $selectedVideo.classList.remove('video-selected');
+      $selectedVideo.parentElement.classList.remove('container-selected');
+    }
+  }
+
   addRemoteVideo($video, peer) {
     const $container = document.createElement('div');
-    $container.className = 'remote-video';
+    $container.className = 'video-container';
     $container.id = 'container_' + webrtc.getDomId(peer);
     $container.appendChild($video);
 
-    $video.className = 'remote-video-player';
+    $video.className = 'video-player';
 
-    $video.onclick = function () {
-      console.warn('clicked video', webrtc.getDomId(peer));
+    $video.onclick = () => {
+      // console.warn('clicked video', webrtc.getDomId(peer));
+      this.clearSelected();
+      $container.classList.add('container-selected');
+      $video.classList.add('video-selected');
+      // console.log($container);
       // $container.style.width = $video.videoWidth + 'px';
       // $container.style.height = $video.videoHeight + 'px';
     };
