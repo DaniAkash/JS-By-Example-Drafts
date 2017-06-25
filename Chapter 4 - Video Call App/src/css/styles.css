@@ -18,23 +18,41 @@ body {
 .create-room-button {
   margin: 20px;
 }*/
-.video-area {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100vw;
+@media only screen and (max-width: 736px) {
+  .video-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media only screen and (min-width: 736px) {
+  .video-area {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100vw;
+  }
 }
 .video-player {
   max-height: 25vh;
   max-width: 25vh;
   margin: 20px;
 }
+.video-container {
+  border: 1px solid black;
+}
+.video-container-me {
+  border: 1px solid blue;
+}
 .video-selected {
   max-height: 50vh;
   max-width: 50vh;
 }
-.container-selected {
-  order: -1;
+@media only screen and (min-width: 736px) {
+  .container-selected {
+    order: -1;
+  }
 }
 /*.primary-video {
   max-height: 500px;
