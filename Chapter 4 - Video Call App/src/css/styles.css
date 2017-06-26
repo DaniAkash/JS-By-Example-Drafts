@@ -38,12 +38,12 @@ body {
   max-width: 25vh;
   margin: 20px;
 }
-.video-container {
+/*.video-container {
   border: 1px solid black;
 }
 .video-container-me {
   border: 1px solid blue;
-}
+}*/
 @media only screen and (max-width: 736px) {
   .video-selected {
     max-height: 70vw;
@@ -127,8 +127,8 @@ body {
 .copied {
   margin-left: 10px;
 }
-.volume {
+/*.volume {
   z-index: 1000;
   position: absolute;
   bottom: 20px;
-}
+}*/
