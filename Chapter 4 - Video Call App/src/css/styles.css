@@ -31,7 +31,6 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 100vw;
   }
 }
 .video-player {
@@ -45,11 +44,17 @@ body {
 .video-container-me {
   border: 1px solid blue;
 }
-.video-selected {
-  max-height: 50vh;
-  max-width: 50vh;
+@media only screen and (max-width: 736px) {
+  .video-selected {
+    max-height: 70vw;
+    max-width: 70vw;
+  }
 }
 @media only screen and (min-width: 736px) {
+  .video-selected {
+    max-height: 50vh;
+    max-width: 50vh;
+  }
   .container-selected {
     order: -1;
   }
