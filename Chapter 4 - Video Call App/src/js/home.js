@@ -1,5 +1,7 @@
 import './general';
 
+import SimpleWebRTC from 'simplewebrtc/out/simplewebrtc-with-adapter.bundle.js';
+
 const webrtc = new SimpleWebRTC({
   // the id/element dom element that will hold "our" video
   localVideoEl: 'localVideo',

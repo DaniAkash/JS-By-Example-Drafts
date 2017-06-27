@@ -12,6 +12,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.1",
+    "simplewebrtc": "^3.0.0",
     "toastr": "^2.1.2"
   },
   "devDependencies": {
