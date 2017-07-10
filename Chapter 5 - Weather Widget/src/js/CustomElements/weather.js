@@ -36,8 +36,8 @@ export default class weather extends HTMLElement {
         }
         .day-icon {
           flex: 1;
-          max-height: 70%;
-          max-width: 70%;
+          max-height: 100%;
+          max-width: 100%;
         }
         .text {
           flex: 1;
@@ -57,7 +57,7 @@ export default class weather extends HTMLElement {
         <div class="details">
           <canvas id="dayIcon" class="day-icon"></canvas>
           <div class="text">
-            <h2 class="text-content">32 C</h2>
+            <h2 class="text-content">32° C</h2>
             <p class="text-content">03:04 pm</p>
             <p class="text-content">Drizzle</p>
           </div>
