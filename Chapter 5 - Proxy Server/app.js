@@ -1,5 +1,8 @@
+require('dotenv').config();
 const express = require('express'),
-  bodyParser = require('body-parser');
+  bodyParser = require('body-parser'),
+  DarkSky = require('dark-sky'),
+  forecast = new DarkSky(process.env.API_KEY);
 
 const app = express();
 app.use(bodyParser.json());
@@ -11,8 +14,18 @@ app.use(function(req, res, next) {
 
 app.set('port', 3000);
 
-app.post('/getWeather', (req, res, next) => {
-
+app.get('/getWeather/:latlong', (req, res, next) => {
+  forecast
+    .latitude('37.8267')
+    .longitude('-122.423')
+    .exclude('minutely,hourly,daily,alerts,flags')
+    .get()
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.error(err);
+    });
 });
 
 const http = require('http').Server(app);
