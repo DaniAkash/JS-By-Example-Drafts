@@ -15,17 +15,20 @@ app.use(function(req, res, next) {
 app.set('port', 3000);
 
 app.get('/getWeather/:latlong', (req, res, next) => {
-  forecast
-    .latitude('37.8267')
-    .longitude('-122.423')
-    .exclude('minutely,hourly,daily,alerts,flags')
-    .get()
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  const latlong = req.params.latlong.split(',');
+  if(latlong.length === 2) {
+    forecast
+      .latitude(latlong[0])
+      .longitude(latlong[1])
+      .exclude('minutely,hourly,daily,alerts,flags')
+      .get()
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
 });
 
 const http = require('http').Server(app);
