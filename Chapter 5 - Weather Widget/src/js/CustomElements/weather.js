@@ -10,6 +10,32 @@ export default class weather extends HTMLElement {
     this.longitude = this.getAttribute('long');
   }
 
+  static get observedAttributes() {return ['lat', 'long']; }
+
+  attributeChangedCallback(attr, oldValue, newValue) {
+    if (attr === 'lat') {
+      this.latitude = newValue;
+    }
+    if(attr === 'long') {
+      this.longitude = newValue;
+    }
+    if(this.latitude && this.longitude) {
+      apiCall(`getWeather/${this.latitude},${this.longitude}`, {}, 'GET')
+        .then(response => {
+
+          this.$city.textContent = response.city;
+          this.$temperature.textContent = response.currently.temperature;
+          this.$summary.textContent = response.currently.summary;
+
+          let skycons = new Skycons({"color": "black"});
+          skycons.add(this.$icon, Skycons[response.currently.icon.toUpperCase()]);
+          skycons.play();
+        })
+        .catch(() => {
+        });
+    }
+  }
+
   displayTime() {
     const date = new Date();
     const displayTime = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
