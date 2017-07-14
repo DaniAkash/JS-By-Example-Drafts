@@ -22,15 +22,28 @@ function showPosition(position) {
   const latitude = position.coords.latitude;
   const longitude = position.coords.longitude;
 
-  const $weather = `<x-weather lat="${latitude}" long="${longitude}"><x-weather>`;
+  const createWeatherElement = className => {
+    const $latitude = document.createAttribute('lat');
+    $latitude.value = latitude;
+    const $longitude = document.createAttribute('long');
+    $longitude.value = longitude;
+    const $class = document.createAttribute('class');
+    $class.value = className;
+
+    const $weather = document.createElement('x-weather');
+    $weather.setAttributeNode($latitude);
+    $weather.setAttributeNode($longitude);
+
+    return $weather;
+  };
 
   const $largeContainer = document.querySelector('.large-container');
   const $mediumContainer = document.querySelector('.medium-container');
   const $smallContainer = document.querySelector('.small-container');
 
-  $largeContainer.innerHTML = $weather;
-  $mediumContainer.innerHTML = $weather;
-  $smallContainer.innerHTML = $weather;
+  $largeContainer.appendChild(createWeatherElement('large'));
+  $mediumContainer.appendChild(createWeatherElement('medium'));
+  $smallContainer.appendChild(createWeatherElement('small'));
 }
 
 function errorPosition(error) {
