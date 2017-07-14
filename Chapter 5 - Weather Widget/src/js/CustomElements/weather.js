@@ -91,7 +91,7 @@ export default class weather extends HTMLElement {
           this.$summary.textContent = response.currently.summary;
 
           let skycons = new Skycons({"color": "black"});
-          skycons.add(this.$icon, Skycons.RAIN);
+          skycons.add(this.$icon, Skycons[response.currently.icon.toUpperCase()]);
           skycons.play();
         })
         .catch(() => {
