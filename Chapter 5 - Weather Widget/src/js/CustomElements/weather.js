@@ -28,7 +28,7 @@ export default class weather extends HTMLElement {
           this.$summary.textContent = response.currently.summary;
 
           let skycons = new Skycons({"color": "black"});
-          skycons.add(this.$icon, Skycons[response.currently.icon.toUpperCase()]);
+          skycons.add(this.$icon, Skycons[response.currently.icon.toUpperCase().replace('-','_')]);
           skycons.play();
         })
         .catch(() => {
@@ -117,7 +117,7 @@ export default class weather extends HTMLElement {
           this.$summary.textContent = response.currently.summary;
 
           let skycons = new Skycons({"color": "black"});
-          skycons.add(this.$icon, Skycons[response.currently.icon.toUpperCase()]);
+          skycons.add(this.$icon, Skycons[response.currently.icon.toUpperCase().replace('-','_')]);
           skycons.play();
         })
         .catch(() => {
