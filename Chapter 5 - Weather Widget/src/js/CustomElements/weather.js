@@ -1,10 +1,13 @@
 import '../skycons';
+import apiCall from './apiCall';
 
 export default class weather extends HTMLElement {
   constructor() {
     super();
 
     this._shadowRoot = this.attachShadow({mode: 'open'});
+    this.latitude = this.getAttribute('lat');
+    this.longitude = this.getAttribute('long');
   }
 
   displayTime() {
@@ -59,22 +62,40 @@ export default class weather extends HTMLElement {
       </style>
       <div class="weather-container">
         <div class="title">
-          <h2>Chennai, CH</h2>
+          <h2 id="city">Loading...</h2>
         </div>
         <div class="details">
           <canvas id="dayIcon" class="day-icon"></canvas>
           <div class="text">
-            <h2 class="text-content">32° C</h2>
-            <p class="text-content" id="time">03:04 pm</p>
-            <p class="text-content">Drizzle</p>
+            <h2 class="text-content" id="temperature">--</h2>
+            <p class="text-content" id="time">--</p>
+            <p class="text-content" id="summary">--</p>
           </div>
         </div>
       </div>
     `;
 
-    let skycons = new Skycons({"color": "black"});
-    skycons.add(this._shadowRoot.querySelector('#dayIcon'), Skycons.RAIN);
-    skycons.play();
+    this.$icon = this._shadowRoot.querySelector('#dayIcon');
+    this.$city = this._shadowRoot.querySelector('#city');
+    this.$temperature = this._shadowRoot.querySelector('#temperature');
+    this.$summary = this._shadowRoot.querySelector('#summary');
+
     setInterval(this.displayTime.bind(this), 1000);
+
+    if(this.latitude && this.longitude) {
+      apiCall(`getWeather/${this.latitude},${this.longitude}`, {}, 'GET')
+        .then(response => {
+
+          this.$city.textContent = response.city;
+          this.$temperature.textContent = response.currently.temperature;
+          this.$summary.textContent = response.currently.summary;
+
+          let skycons = new Skycons({"color": "black"});
+          skycons.add(this.$icon, Skycons.RAIN);
+          skycons.play();
+        })
+        .catch(() => {
+        });
+    }
   }
 }

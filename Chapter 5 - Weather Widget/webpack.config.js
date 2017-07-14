@@ -145,6 +145,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({ // Remove this plugin if you don't plan to define any global constants
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      SERVER_URL: JSON.stringify(process.env.SERVER_URL),
     }),
     // extractLess, // Make sure ExtractTextPlugin instance is included in array before the PurifyCSSPlugin
     // new PurifyCSSPlugin({
