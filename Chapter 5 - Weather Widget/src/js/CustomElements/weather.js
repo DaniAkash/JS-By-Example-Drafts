@@ -24,7 +24,7 @@ export default class weather extends HTMLElement {
         .then(response => {
 
           this.$city.textContent = response.city;
-          this.$temperature.textContent = response.currently.temperature;
+          this.$temperature.textContent = `${response.currently.temperature}° F`;
           this.$summary.textContent = response.currently.summary;
 
           let skycons = new Skycons({"color": "black"});
@@ -113,7 +113,7 @@ export default class weather extends HTMLElement {
         .then(response => {
 
           this.$city.textContent = response.city;
-          this.$temperature.textContent = response.currently.temperature;
+          this.$temperature.textContent = `${response.currently.temperature}° F`;
           this.$summary.textContent = response.currently.summary;
 
           let skycons = new Skycons({"color": "black"});
