@@ -28,9 +28,9 @@ function showPosition(position) {
   const $mediumContainer = document.querySelector('.medium-container');
   const $smallContainer = document.querySelector('.small-container');
 
-  $largeContainer.innerHTML($weather);
-  $mediumContainer.innerHTML($weather);
-  $smallContainer.innerHTML($weather);
+  $largeContainer.innerHTML = $weather;
+  $mediumContainer.innerHTML = $weather;
+  $smallContainer.innerHTML = $weather;
 }
 
 function errorPosition(error) {

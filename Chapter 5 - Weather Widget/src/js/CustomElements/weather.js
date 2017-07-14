@@ -7,6 +7,13 @@ export default class weather extends HTMLElement {
     this._shadowRoot = this.attachShadow({mode: 'open'});
   }
 
+  displayTime() {
+    const date = new Date();
+    const displayTime = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    const $time = this._shadowRoot.querySelector('#time');
+    $time.textContent = displayTime;
+  }
+
   connectedCallback() {
     this._shadowRoot.innerHTML = `
       <style>
@@ -58,7 +65,7 @@ export default class weather extends HTMLElement {
           <canvas id="dayIcon" class="day-icon"></canvas>
           <div class="text">
             <h2 class="text-content">32° C</h2>
-            <p class="text-content">03:04 pm</p>
+            <p class="text-content" id="time">03:04 pm</p>
             <p class="text-content">Drizzle</p>
           </div>
         </div>
@@ -68,5 +75,6 @@ export default class weather extends HTMLElement {
     let skycons = new Skycons({"color": "black"});
     skycons.add(this._shadowRoot.querySelector('#dayIcon'), Skycons.RAIN);
     skycons.play();
+    setInterval(this.displayTime.bind(this), 1000);
   }
 }
