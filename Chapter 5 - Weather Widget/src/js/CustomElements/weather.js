@@ -17,7 +17,7 @@ export default class weather extends HTMLElement {
   }
 
   set long(long) {
-    this.longitude = long;
+    this.longitude = String(long);
     this.setWeather();
   }
 
@@ -26,16 +26,16 @@ export default class weather extends HTMLElement {
   }
 
   set lat(lat) {
-    this.latitude = lat;
+    this.latitude = String(lat);
     this.setWeather();
   }
 
   attributeChangedCallback(attr, oldValue, newValue) {
     if (attr === 'lat') {
-      this.latitude = newValue;
+      this.latitude = String(newValue);
     }
     if(attr === 'long') {
-      this.longitude = newValue;
+      this.longitude = String(newValue);
     }
     this.setWeather();
   }
