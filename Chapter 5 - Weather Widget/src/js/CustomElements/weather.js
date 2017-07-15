@@ -12,6 +12,24 @@ export default class weather extends HTMLElement {
 
   static get observedAttributes() {return ['lat', 'long']; }
 
+  get long() {
+    return this.longitude;
+  }
+
+  set long(long) {
+    this.longitude = long;
+    this.setWeather();
+  }
+
+  get lat() {
+    return this.latitude;
+  }
+
+  set lat(lat) {
+    this.latitude = lat;
+    this.setWeather();
+  }
+
   attributeChangedCallback(attr, oldValue, newValue) {
     if (attr === 'lat') {
       this.latitude = newValue;
