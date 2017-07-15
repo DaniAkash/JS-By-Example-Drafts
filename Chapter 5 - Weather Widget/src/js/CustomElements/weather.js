@@ -19,6 +19,10 @@ export default class weather extends HTMLElement {
     if(attr === 'long') {
       this.longitude = newValue;
     }
+    this.setWeather();
+  }
+
+  setWeather() {
     if(this.latitude && this.longitude) {
       apiCall(`getWeather/${this.latitude},${this.longitude}`, {}, 'GET')
         .then(response => {
@@ -108,20 +112,6 @@ export default class weather extends HTMLElement {
 
     setInterval(this.displayTime.bind(this), 1000);
 
-    if(this.latitude && this.longitude) {
-      apiCall(`getWeather/${this.latitude},${this.longitude}`, {}, 'GET')
-        .then(response => {
-
-          this.$city.textContent = response.city;
-          this.$temperature.textContent = `${response.currently.temperature}° F`;
-          this.$summary.textContent = response.currently.summary;
-
-          let skycons = new Skycons({"color": "black"});
-          skycons.add(this.$icon, Skycons[response.currently.icon.toUpperCase().replace('-','_')]);
-          skycons.play();
-        })
-        .catch(() => {
-        });
-    }
+    this.setWeather();
   }
 }

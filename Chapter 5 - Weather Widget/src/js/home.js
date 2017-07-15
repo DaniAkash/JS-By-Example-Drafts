@@ -2,11 +2,11 @@ import './general';
 
 import Weather from './CustomElements/weather';
 
-window.addEventListener('WebComponentsReady', function(e) {
+window.addEventListener('WebComponentsReady', () => {
   window.customElements.define('x-weather', Weather);
 });
 
-window.onload = function() {
+window.onload = () => {
   getLocation();
 };
 
