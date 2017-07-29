@@ -45,12 +45,16 @@ paths:
   /posts:
     x-swagger-router-controller: posts
     get:
-      description: returns 5 latest posts
+      description: returns all the posts
       responses:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/HelloWorldResponse"
+            $ref: "#/definitions/PostsResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -67,8 +71,21 @@ definitions:
     properties:
       message:
         type: string
-  Post
-  
+  Comment:
+    type: object
+    required:
+      - id
+      - name
+      - comment
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      comment:
+        type: string
+  Post:
+    type: object
     required:
       - id
       - title
@@ -88,7 +105,7 @@ definitions:
       comments:
         type: array
         items:
-          type: string
+          $ref: "#/definitions/Comment"
       author:
         type: string
   PostsResponse:
