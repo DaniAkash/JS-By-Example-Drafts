@@ -46,6 +46,7 @@ paths:
     x-swagger-router-controller: posts
     get:
       description: returns all the posts
+      operationId: posts
       responses:
         "200":
           description: Success
@@ -55,6 +56,66 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /authors:
+    x-swagger-router-controller: authors
+    get:
+      description: returns all the authors
+      operationId: authors
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              type: string
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /post/{id}:
+      x-swagger-router-controller: post
+      get:
+        description: get a single post by id
+        operationId: post
+        parameters:
+          - name: id
+            in: path
+            description: "ID of the post to return"
+            required: true
+            type: integer
+            format: int64
+        responses:
+          "200":
+            description: Success
+            schema:
+              $ref: "#/definitions/Post"
+          default:
+            description: Error
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+  /author/{name}:
+    x-swagger-router-controller: author
+    get:
+      description: returns all the authors
+      operationId: author
+      parameters:
+        - name: name
+          in: path
+          description: "name of the author who's posts should be listed"
+          required: true
+          type: string
+          format: int64
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Post"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
