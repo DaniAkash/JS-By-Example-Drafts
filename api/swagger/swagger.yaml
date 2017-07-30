@@ -148,7 +148,21 @@ paths:
           description: a new comment by someone
           required: true
           schema:
-            $ref: "#/definitions/Comment"
+            type: object
+            required:
+              - postId
+              - id
+              - name
+              - comment
+            properties:
+              postId:
+                type: string
+              id:
+                type: string
+              name:
+                type: string
+              comment:
+                type: string
       responses:
         "200":
           description: Success
