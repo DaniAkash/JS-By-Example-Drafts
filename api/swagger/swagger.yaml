@@ -103,7 +103,7 @@ paths:
           in: path
           description: "ID of the post to return"
           required: true
-          type: integer
+          type: string
           format: int64
       responses:
         "200":
