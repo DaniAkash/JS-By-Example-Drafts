@@ -19,7 +19,10 @@ function addPost(req, res) {
 function post(req, res) {
     const posts = db.get('posts').value();
 
-    const post = _.find(posts, {id: req.swagger.params.id.value}) || 'fun';
+    const post = _.find(posts, {id: req.swagger.params.id.value});
 
-    res.status(200).json(post);
+    if(post) {
+        res.status(200).json(post);
+    }
+    res.status(400).json({message: 'no posts found'})
 }
