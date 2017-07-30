@@ -13,6 +13,11 @@ function addComment(req, res) {
         .find({id: req.body.postId})
         .value();
 
+    if(!requiredPost) {
+        res.status(400).json({message: 'Not a valid post!'});
+        return;
+    }
+
     requiredPost.comments = [{
         id: req.body.id,
         name: req.body.name,
@@ -27,11 +32,7 @@ function addComment(req, res) {
     db
     .set('posts', newPosts)
     .write()
-    .then(() => {
-        res.status(200).json({message: 'Comment added successfully'});
-    })
-    .catch(() => {
-        res.status(500).json({message: 'Unable to add comment'});
-    });
+    .then(res.status(200).json({message: 'Comment added successfully'}))
+    .catch(res.status(500).json({message: 'Unable to add comment'}));
 
 }

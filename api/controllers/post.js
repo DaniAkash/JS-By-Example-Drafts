@@ -10,10 +10,8 @@ function addPost(req, res) {
     db.get('posts')
         .unshift(req.body)
         .write()
-        .then(() => {
-            res.status(200).json({message: 'Post added Successfully'});
-        })
-        .catch(console.error);
+        .then(() => res.status(200).json({message: 'Post added Successfully'}))
+        .catch(error => res.status(500).json({message: 'Unable to add post!'}));
 }
 
 function post(req, res) {
@@ -23,6 +21,7 @@ function post(req, res) {
 
     if(post) {
         res.status(200).json(post);
+        return;
     }
     res.status(400).json({message: 'no posts found'})
 }
