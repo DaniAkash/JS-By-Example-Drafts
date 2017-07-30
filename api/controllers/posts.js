@@ -1,5 +1,5 @@
 module.exports = {
-  posts: posts
+  posts,
 };
 
 const db = require('../helpers/db').db;
