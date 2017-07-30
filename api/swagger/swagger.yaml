@@ -115,9 +115,9 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
   /author/{name}:
-    x-swagger-router-controller: author
+    x-swagger-router-controller: posts
     get:
-      description: returns all the authors
+      description: returns posts of the selected authors
       operationId: author
       parameters:
         - name: name
