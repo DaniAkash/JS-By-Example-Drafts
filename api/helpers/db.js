@@ -5,4 +5,7 @@ const db = low('db.json', {
   storage: fileAsync
 });
 
+// db.defaults({ posts: [] })
+//   .write()
+
 module.exports = {db};
