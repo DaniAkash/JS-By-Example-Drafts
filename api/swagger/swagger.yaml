@@ -72,27 +72,48 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /post:
+    x-swagger-router-controller: post
+    post:
+      description: add a single post
+      operationId: addPost
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "The new post added by the author"
+          required: true
+          schema:
+            $ref: "#/definitions/Post"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/SuccessResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /post/{id}:
-      x-swagger-router-controller: post
-      get:
-        description: get a single post by id
-        operationId: post
-        parameters:
-          - name: id
-            in: path
-            description: "ID of the post to return"
-            required: true
-            type: integer
-            format: int64
-        responses:
-          "200":
-            description: Success
-            schema:
-              $ref: "#/definitions/Post"
-          default:
-            description: Error
-            schema:
-              $ref: "#/definitions/ErrorResponse"
+    x-swagger-router-controller: post
+    get:
+      description: get a single post by id
+      operationId: post
+      parameters:
+        - name: id
+          in: path
+          description: "ID of the post to return"
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Post"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /author/{name}:
     x-swagger-router-controller: author
     get:
@@ -115,7 +136,28 @@ paths:
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"  
+            $ref: "#/definitions/ErrorResponse"
+  /comment:
+    x-swagger-router-controller: comment
+    post:
+      description: add new comment
+      operationId: addComment
+      parameters:
+        - in: body
+          name: body
+          description: a new comment by someone
+          required: true
+          schema:
+            $ref: "#/definitions/Comment"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/SuccessResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"            
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -127,6 +169,12 @@ definitions:
       message:
         type: string
   ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  SuccessResponse:
     required:
       - message
     properties:
@@ -150,7 +198,7 @@ definitions:
     required:
       - id
       - title
-      - body
+      - content
       - datetime
       - comments
       - author
@@ -159,7 +207,7 @@ definitions:
         type: string
       title:
         type: string
-      body:
+      content:
         type: string
       datetime:
         type: string
