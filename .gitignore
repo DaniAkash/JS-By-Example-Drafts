@@ -32,3 +32,10 @@ node_modules
 
 # Runtime configuration for swagger app
 config/runtime.yaml
+
+node_modules
+*.log
+dist
+.editorconfig
+.eslintrc.json
+.env
