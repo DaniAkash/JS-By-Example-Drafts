@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from 'reactstrap';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink, Route, withRouter } from 'react-router-dom';
 
 import './App.css';
 import routes from './routes';
 import Home from './Components/Home/Home';
 
 class App extends Component {
+
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+  }
 
   constructor(props) {
     super(props);
@@ -16,6 +23,12 @@ class App extends Component {
     this.state = {
       isOpen: false
     };
+  }
+
+  componentWillMount() {
+    if(this.props.location.pathname === '/') {
+      this.props.history.push(routes.home);
+    }
   }
 
   toggle() {
@@ -51,4 +64,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
