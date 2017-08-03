@@ -8,6 +8,7 @@ import './App.css';
 import routes from './routes';
 import Home from './Components/Home/Home';
 import Post from './Components/Post/Post';
+import AuthorList from './Components/Author/AuthorList';
 
 class App extends Component {
 
@@ -61,6 +62,7 @@ class App extends Component {
 
         <Route exact path={routes.home} component={Home} />
         <Route exact path={routes.post} component={Post} />
+        <Route exact path={routes.authors} component={AuthorList} />
       </div>
     );
   }

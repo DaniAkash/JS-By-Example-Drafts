@@ -9,7 +9,7 @@ const PostSummary = ({post}) => (
     <h3>{post.title}</h3>
     <p>{post.author}</p>
     <p>{post.content}</p>
-    <NavLink className={`btn btn-primary read-more-button`} activeClassName={'active'} to={routes.post.replace(':id', post.id)}>Read More</NavLink>
+    <NavLink className={`btn btn-primary read-more-button`} to={routes.post.replace(':id', post.id)}>Read More</NavLink>
   </div>
 );
 
