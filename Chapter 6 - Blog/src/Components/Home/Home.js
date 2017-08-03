@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PostSummary from '../Common/PostSummary';
+
 import apiCall from '../../services/api/apiCall';
 
 class Home extends Component {
@@ -28,7 +30,11 @@ class Home extends Component {
 
   render () {
     return (
-      <h2>Post</h2>
+      <div className={`posts-container container`}>
+        {
+          this.state.posts.map(post => <PostSummary key={post.id} post={post}>Post</PostSummary>)
+        }
+      </div>
     );
   }
 }
