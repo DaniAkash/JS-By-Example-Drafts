@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import routes from '../../routes';
@@ -11,5 +12,9 @@ const PostSummary = ({post}) => (
     <NavLink className={`btn btn-primary read-more-button`} activeClassName={'active'} to={routes.post.replace(':id', post.id)}>Read More</NavLink>
   </div>
 );
+
+PostSummary.propTypes = {
+  post: PropTypes.object.isRequired,
+};
 
 export default PostSummary;
