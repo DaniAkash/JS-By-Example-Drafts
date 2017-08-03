@@ -7,6 +7,7 @@ import { NavLink, Route, withRouter } from 'react-router-dom';
 import './App.css';
 import routes from './routes';
 import Home from './Components/Home/Home';
+import Post from './Components/Post/Post';
 
 class App extends Component {
 
@@ -59,6 +60,7 @@ class App extends Component {
         </Navbar>
 
         <Route exact path={routes.home} component={Home} />
+        <Route exact path={routes.post} component={Post} />
       </div>
     );
   }
