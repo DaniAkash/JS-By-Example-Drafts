@@ -5,22 +5,23 @@ const ajaxCallsReducer = (state = initialState.ajaxCalls, action) => {
   switch(action.type) {
 
     case actions.GET_POSTS_AJAX_CALL_START:
-      Object.assign(
+      debugger;
+      return Object.assign(
         state,
         {
           getAllPosts: {
-            isLoading: true,
+            loading: true,
             hasError: false,
           },
         }
       );
 
     case actions.GET_POSTS_AJAX_CALL_SUCCESS:
-      Object.assign(
+      return Object.assign(
         state,
         {
           getAllPosts: {
-            isLoading: false,
+            loading: false,
             hasError: false,
           },
         }
@@ -28,11 +29,11 @@ const ajaxCallsReducer = (state = initialState.ajaxCalls, action) => {
 
 
     case actions.GET_POSTS_AJAX_CALL_FAILURE:
-      Object.assign(
+      return Object.assign(
         state,
         {
           getAllPosts: {
-            isLoading: false,
+            loading: false,
             hasError: true,
           },
         }
@@ -40,33 +41,33 @@ const ajaxCallsReducer = (state = initialState.ajaxCalls, action) => {
 
 
     case actions.GET_AUTHORS_AJAX_CALL_START:
-      Object.assign(
+      return Object.assign(
         state,
         {
           getAuthors: {
-            isLoading: true,
+            loading: true,
             hasError: false,
           },
         }
       );
 
     case actions.GET_AUTHORS_AJAX_CALL_SUCCESS:
-      Object.assign(
+      return Object.assign(
         state,
         {
           getAuthors: {
-            isLoading: false,
+            loading: false,
             hasError: false,
           },
         }
       );
 
     case actions.GET_AUTHORS_AJAX_CALL_FAILURE:
-      Object.assign(
+      return Object.assign(
         state,
         {
           getAuthors: {
-            isLoading: false,
+            loading: false,
             hasError: true,
           },
         }
@@ -77,8 +78,10 @@ const ajaxCallsReducer = (state = initialState.ajaxCalls, action) => {
     // case actions.ADD_POST_AJAX_CALL_SUCCESS:
 
     // case actions.ADD_POST_AJAX_CALL_FAILURE:
+
+    default:
+      return state;
   }
-  return state;
 };
 
 export default ajaxCallsReducer;
