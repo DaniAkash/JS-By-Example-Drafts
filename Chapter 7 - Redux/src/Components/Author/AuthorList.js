@@ -12,7 +12,7 @@ class AuthorList extends Component {
 
     this.state = {
       authors: [],
-      loading: true,
+      loading: false,
       hasError: false,
     };
   }

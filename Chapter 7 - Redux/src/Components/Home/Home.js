@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import PostSummary from '../Common/PostSummary';
 import ErrorMessage from '../Common/ErrorMessage';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import apiCall from '../../services/api/apiCall';
 import LoadingIndicator from '../Common/LoadingIndicator';
+import * as postActions from '../../redux/actions/postActions';
 
 class Home extends Component {
+
+  static propTypes = {
+    posts: PropTypes.array.isRequired,
+    postActions: PropTypes.object.isRequired,
+  }
 
   constructor() {
     super();
 
     this.state = {
       posts: [],
-      loading: true,
+      loading: false,
       hasError: false,
     };
   }
 
   componentWillMount() {
-    this.setState({loading: true});
-    apiCall('posts', {}, 'GET')
-    .then(posts => {
-      this.setState({posts, loading: false});
-    })
-    .catch(error => {
-      this.setState({hasError: true, loading: false});
-      console.error(error);
-    });
+    this.props.postActions.getAllPosts();
   }
 
   render () {
@@ -47,11 +48,26 @@ class Home extends Component {
             null
         }
         {
-          this.state.posts.map(post => <PostSummary key={post.id} post={post}>Post</PostSummary>)
+          this.props.posts.map(post => <PostSummary key={post.id} post={post}>Post</PostSummary>)
         }
       </div>
     );
   }
 }
 
-export default Home;
+function mapStateToProps(state) {
+  return {
+    posts: state.posts,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    postActions: bindActionCreators(postActions, dispatch),
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

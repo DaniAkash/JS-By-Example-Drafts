@@ -11,7 +11,7 @@ class Post extends Component {
 
     this.state = {
       post: {},
-      loading: true,
+      loading: false,
       hasError: false,
     };
   }
