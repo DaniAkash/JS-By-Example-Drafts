@@ -9,7 +9,7 @@ import LoadingIndicator from '../Common/LoadingIndicator';
 class Post extends Component {
 
   static propTypes = {
-    post: PropTypes.object.isRequired,
+    post: PropTypes.object,
     loading: PropTypes.bool.isRequired,
     hasError: PropTypes.bool.isRequired,
   }
