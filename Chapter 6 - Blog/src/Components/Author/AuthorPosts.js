@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import apiCall from '../../services/api/apiCall';
 import PostSummary from '../Common/PostSummary';
-import routes from '../../routes';
 
 class AuthorPosts extends Component {
 
