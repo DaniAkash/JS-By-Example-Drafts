@@ -35,7 +35,7 @@ class AuthorList extends Component {
           {
             this.state.authors.map((author, index) =>
               <li className={`list-group-item`} key={index}>
-                <NavLink to={routes.author.replace(':id', author)}>{author}</NavLink>
+                <NavLink to={routes.author.replace(':authorname', author)}>{author}</NavLink>
               </li>
             )
           }
