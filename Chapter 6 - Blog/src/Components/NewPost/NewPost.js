@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import uuidv4 from 'uuid/v4';
 
 import apiCall from '../../services/api/apiCall';
+import ErrorMessage from '../Common/ErrorMessage';
+import SuccessMessage from '../Common/SuccessMessage';
+import LoadingIndicator from '../Common/LoadingIndicator';
 
 class NewPost extends Component {
 
@@ -22,9 +25,12 @@ class NewPost extends Component {
       content: '',
       noOfLines: 0,
       loading: false,
+      success: false,
+      hasError: false,
     };
     this.editAuthorName = this.editAuthorName.bind(this);
     this.editContent = this.editContent.bind(this);
+    this.editTitle = this.editTitle.bind(this);
     this.submit = this.submit.bind(this);
   }
 
@@ -42,8 +48,9 @@ class NewPost extends Component {
   }
 
   submit() {
-    this.setState({loading: true});
     if(this.state.author && this.state.content && this.state.title) {
+      this.setState({loading: true});
+
       const date = new Date();
       const epoch = (date.getTime()/1000).toFixed(0).toString();
       const body = {
@@ -54,17 +61,35 @@ class NewPost extends Component {
         datetime: epoch,
         comments: [],
       };
-      apiCall(`post`, body)
-      .then(success => {
 
-        this.setState({posts, loading: false});
+      apiCall(`post`, body)
+      .then(() => {
+
+        this.setState({
+          author: '',
+          title: '',
+          content: '',
+          noOfLines: 0,
+          loading: false,
+          success: true,
+        });
+
+        setTimeout(() => {
+          this.setState({success: false});
+        }, 3000);
+
       })
       .catch(error => {
         this.setState({hasError: true, loading: false});
         console.error(error);
-      });
-    } else {
 
+        setTimeout(() => {
+          this.setState({hasError: false});
+        }, 3000);
+      });
+
+    } else {
+      alert('Please Fill in all the fields');
     }
   }
 
@@ -87,7 +112,27 @@ class NewPost extends Component {
           <label htmlFor="content">Post:</label>
           <textarea className="form-control" rows={noOfLines} id="content" value={this.state.content} onChange={this.editContent}></textarea>
         </div>
-        <button type="button" className="btn btn-primary" onClick={this.submit}>Submit Post</button>
+        {
+          this.state.loading
+          ?
+            <LoadingIndicator />
+          :
+            <button type="button" className="btn btn-primary" onClick={this.submit}>Submit Post</button>
+        }
+        {
+          this.state.hasError
+          ?
+            <ErrorMessage title={'Error!'} message={`Unable to submit post!`} />
+          :
+            null
+        }
+        {
+          this.state.success
+          ?
+            <SuccessMessage title={'Success!'} message={`Post has been Submitted!`} />
+          :
+            null
+        }
       </div>
     );
   }
