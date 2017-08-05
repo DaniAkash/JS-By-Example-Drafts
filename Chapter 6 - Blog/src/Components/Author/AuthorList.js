@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import ErrorMessage from '../Common/ErrorMessage';
 
 import apiCall from '../../services/api/apiCall';
 import routes from '../../routes';
@@ -36,6 +37,13 @@ class AuthorList extends Component {
           this.state.loading
           ?
             <LoadingIndicator />
+          :
+            null
+        }
+        {
+          this.state.hasError
+          ?
+            <ErrorMessage title={'Error!'} message={'Unable to retrieve Author List!'} />
           :
             null
         }

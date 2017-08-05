@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
+import ErrorMessage from '../Common/ErrorMessage';
 import apiCall from '../../services/api/apiCall';
 import LoadingIndicator from '../Common/LoadingIndicator';
 
@@ -34,6 +35,13 @@ class Post extends Component {
           this.state.loading
           ?
             <LoadingIndicator />
+          :
+            null
+        }
+        {
+          this.state.hasError
+          ?
+            <ErrorMessage title={'Error!'} message={`Unable to retrieve post!`} />
           :
             null
         }

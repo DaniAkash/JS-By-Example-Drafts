@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PostSummary from '../Common/PostSummary';
+import ErrorMessage from '../Common/ErrorMessage';
 
 import apiCall from '../../services/api/apiCall';
 import LoadingIndicator from '../Common/LoadingIndicator';
@@ -35,6 +36,13 @@ class Home extends Component {
           this.state.loading
           ?
             <LoadingIndicator />
+          :
+            null
+        }
+        {
+          this.state.hasError
+          ?
+            <ErrorMessage title={'Error!'} message={'Unable to retrieve posts!'} />
           :
             null
         }
