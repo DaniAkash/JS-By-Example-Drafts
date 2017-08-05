@@ -28,7 +28,9 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/PostsResponse"
+            type: array
+            items:
+              $ref: "#/definitions/Post"
         default:
           description: Error
           schema:
@@ -202,11 +204,3 @@ definitions:
           $ref: "#/definitions/Comment"
       author:
         type: string
-  PostsResponse:
-    required:
-      - posts
-    properties:
-      posts:
-        type: array
-        items:
-          $ref: "#/definitions/Post"
