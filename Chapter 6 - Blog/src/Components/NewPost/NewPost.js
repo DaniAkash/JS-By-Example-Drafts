@@ -7,6 +7,7 @@ import apiCall from '../../services/api/apiCall';
 import ErrorMessage from '../Common/ErrorMessage';
 import SuccessMessage from '../Common/SuccessMessage';
 import LoadingIndicator from '../Common/LoadingIndicator';
+import PostInputField from './Components/PostInputField';
 
 class NewPost extends Component {
 
@@ -100,18 +101,28 @@ class NewPost extends Component {
     return(
       <div className={'container'}>
         <h2>Write Post</h2>
-        <div className="form-group author-name-input">
-          <label htmlFor="author">Author Name:</label>
-          <input type="text" className="form-control" id="author" value={this.state.author} onChange={this.editAuthorName}/>
-        </div>
-        <div className="form-group title-input">
-          <label htmlFor="title">Title:</label>
-          <input type="text" className="form-control" id="title" value={this.state.title} onChange={this.editTitle}/>
-        </div>
+
+        <PostInputField
+          className={'author-name-input'}
+          id={'author'}
+          title={'Author Name:'}
+          value={this.state.author}
+          onChange={this.editAuthorName}
+        />
+
+        <PostInputField
+          className={'title-input'}
+          id={'title'}
+          title={'Title:'}
+          value={this.state.title}
+          onChange={this.editTitle}
+        />
+
         <div className="form-group content-text-area">
           <label htmlFor="content">Post:</label>
           <textarea className="form-control" rows={noOfLines} id="content" value={this.state.content} onChange={this.editContent}></textarea>
         </div>
+
         {
           this.state.loading
           ?
@@ -119,6 +130,7 @@ class NewPost extends Component {
           :
             <button type="button" className="btn btn-primary" onClick={this.submit}>Submit Post</button>
         }
+
         {
           this.state.hasError
           ?
@@ -126,6 +138,7 @@ class NewPost extends Component {
           :
             null
         }
+
         {
           this.state.success
           ?
@@ -133,6 +146,7 @@ class NewPost extends Component {
           :
             null
         }
+
       </div>
     );
   }
