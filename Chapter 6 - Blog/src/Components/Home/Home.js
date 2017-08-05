@@ -18,8 +18,7 @@ class Home extends Component {
   componentWillMount() {
     this.setState({loading: true});
     apiCall('posts', {}, 'GET')
-    .then(allPosts => {
-      const posts = allPosts.posts;
+    .then(posts => {
       this.setState({posts, loading: false});
     })
     .catch(error => {
