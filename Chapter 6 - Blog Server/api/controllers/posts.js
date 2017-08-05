@@ -4,6 +4,7 @@ module.exports = {
 };
 
 const db = require('../helpers/db').db;
+const _ = require('lodash');
 
 function posts(req, res) {
     const posts = db.get('posts').value();
@@ -14,8 +15,9 @@ function posts(req, res) {
 }
 
 function author(req, res) {
-    console.log(decodeURI(req.swagger.params.name.value));
-    const posts = db.get('posts').filter({author: decodeURI(req.swagger.params.name.value)});
+    const author = decodeURI(req.swagger.params.name.value);
+    const allPosts = db.get('posts').value();
+    const posts = _.filter(allPosts, {author});
 
     setTimeout(() => {
       if(posts.length) {
