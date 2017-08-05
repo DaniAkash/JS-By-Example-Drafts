@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from 'reactstrap';
 import { NavLink, Route, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import './App.css';
 import routes from './routes';
@@ -11,6 +13,8 @@ import Post from './Components/Post/Post';
 import AuthorList from './Components/Author/AuthorList';
 import AuthorPosts from './Components/Author/AuthorPosts';
 import NewPost from './Components/NewPost/NewPost';
+import * as postActions from './redux/actions/postActions';
+import * as authorActions from './redux/actions/authorActions';
 
 class App extends Component {
 
@@ -18,6 +22,8 @@ class App extends Component {
     history: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
+    postActions: PropTypes.object.isRequired,
+    authorActions: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -30,6 +36,8 @@ class App extends Component {
   }
 
   componentWillMount() {
+    this.props.postActions.getAllPosts();
+    this.props.authorActions.getAllAuthors();
     if(this.props.location.pathname === '/') {
       this.props.history.push(routes.home);
     }
@@ -72,4 +80,20 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+function mapStateToProps(state) {
+  return {
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    postActions: bindActionCreators(postActions, dispatch),
+    authorActions: bindActionCreators(authorActions, dispatch),
+  };
+}
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);

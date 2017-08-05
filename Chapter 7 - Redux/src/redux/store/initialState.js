@@ -7,15 +7,15 @@ const initialState = {
   ],
   ajaxCalls: {
     getAllPosts: {
-      isLoading: false,
+      loading: false,
       hasError: false,
     },
     getAuthors: {
-      isLoading: false,
+      loading: false,
       hasError: false,
     },
     addPost: {
-      isLoading: false,
+      loading: false,
       hasError: false,
     }
   }

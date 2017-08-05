@@ -5,9 +5,11 @@ const postsReducer = (state = initialState.posts, action) => {
   switch(action.type) {
     case actions.GET_POSTS:
       return action.data;
+
+    default:
+      return state;
   }
 
-  return state;
 };
 
 export default postsReducer;
