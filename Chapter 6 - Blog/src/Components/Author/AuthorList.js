@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import apiCall from '../../services/api/apiCall';
 import routes from '../../routes';
+import LoadingIndicator from '../Common/LoadingIndicator';
 
 class AuthorList extends Component {
   constructor() {
@@ -31,6 +32,13 @@ class AuthorList extends Component {
     return(
       <div className={`container`}>
         <h2>Authors</h2>
+        {
+          this.state.loading
+          ?
+            <LoadingIndicator />
+          :
+            null
+        }
         <ul className={`list-group`}>
           {
             this.state.authors.map((author, index) =>

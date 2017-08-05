@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PostSummary from '../Common/PostSummary';
 
 import apiCall from '../../services/api/apiCall';
+import LoadingIndicator from '../Common/LoadingIndicator';
 
 class Home extends Component {
 
@@ -30,6 +31,13 @@ class Home extends Component {
   render () {
     return (
       <div className={`posts-container container`}>
+        {
+          this.state.loading
+          ?
+            <LoadingIndicator />
+          :
+            null
+        }
         {
           this.state.posts.map(post => <PostSummary key={post.id} post={post}>Post</PostSummary>)
         }

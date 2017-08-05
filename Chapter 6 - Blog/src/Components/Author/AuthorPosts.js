@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import apiCall from '../../services/api/apiCall';
 import PostSummary from '../Common/PostSummary';
+import LoadingIndicator from '../Common/LoadingIndicator';
 
 class AuthorPosts extends Component {
 
@@ -18,10 +19,12 @@ class AuthorPosts extends Component {
 
     this.state = {
       posts: [],
+      loading: false,
     };
   }
 
   componentWillMount() {
+    this.setState({loading: true});
     apiCall(`author/${this.props.match.params.authorname}`, {}, 'GET')
     .then(posts => {
       this.setState({posts, loading: false});
@@ -34,7 +37,15 @@ class AuthorPosts extends Component {
 
   render() {
     return(
-      <div>
+      <div className={`container`}>
+        <h2>Posts by {decodeURI(this.props.match.params.authorname)}</h2>
+        {
+          this.state.loading
+          ?
+            <LoadingIndicator />
+          :
+            null
+        }
         {
           this.state.posts.map(post => <PostSummary key={post.id} post={post}>Post</PostSummary>)
         }

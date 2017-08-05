@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import apiCall from '../../services/api/apiCall';
+import LoadingIndicator from '../Common/LoadingIndicator';
 
 class Post extends Component {
   constructor() {
@@ -29,6 +30,13 @@ class Post extends Component {
   render() {
     return(
       <div className={`post-container container`}>
+        {
+          this.state.loading
+          ?
+            <LoadingIndicator />
+          :
+            null
+        }
         <h2>{this.state.post.title}</h2>
         <p>{this.state.post.author}</p>
         <p>{this.state.post.content}</p>
