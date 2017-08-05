@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import ErrorMessage from '../Common/ErrorMessage';
-import apiCall from '../../services/api/apiCall';
 import PostSummary from '../Common/PostSummary';
 import LoadingIndicator from '../Common/LoadingIndicator';
 
@@ -15,52 +15,43 @@ class AuthorPosts extends Component {
     match: PropTypes.object.isRequired,
   }
 
-  constructor() {
-    super();
-
-    this.state = {
-      posts: [],
-      loading: false,
-      hasError: false,
-    };
-  }
-
-  componentWillMount() {
-    this.setState({loading: true});
-    apiCall(`author/${this.props.match.params.authorname}`, {}, 'GET')
-    .then(posts => {
-      this.setState({posts, loading: false});
-    })
-    .catch(error => {
-      this.setState({hasError: true, loading: false});
-      console.error(error);
-    });
-  }
-
   render() {
     return(
       <div className={`container`}>
         <h2>Posts by {decodeURI(this.props.match.params.authorname)}</h2>
         {
-          this.state.loading
+          this.props.loading
           ?
             <LoadingIndicator />
           :
             null
         }
         {
-          this.state.hasError
+          this.props.hasError
           ?
             <ErrorMessage title={'Error!'} message={`Unable to retrieve posts!`} />
           :
             null
         }
         {
-          this.state.posts.map(post => <PostSummary key={post.id} post={post}>Post</PostSummary>)
+          this.props.posts.map(post => <PostSummary key={post.id} post={post}>Post</PostSummary>)
         }
       </div>
     );
   }
 }
 
-export default withRouter(AuthorPosts);
+function mapStateToProps(state, ownProps) {
+
+  const authorName = decodeURI(ownProps.match.params.authorname);
+
+  return {
+    posts: state.posts.filter(post => post.author === authorName),
+    loading: state.ajaxCalls.getAuthors.loading && state.ajaxCalls.getAllPosts.loading,
+    hasError: state.ajaxCalls.getAuthors.hasError && state.ajaxCalls.getAllPosts.hasError,
+  };
+}
+
+export default withRouter(
+  connect(mapStateToProps)(AuthorPosts)
+);
