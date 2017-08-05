@@ -1,0 +1,9 @@
+const actions = {
+
+  GET_POSTS: 'GET_POSTS',
+
+  ADD_POST: 'ADD_POST',
+
+  GET_AUTHORS_LIST: 'GET_AUTHORS_LIST',
+
+};
