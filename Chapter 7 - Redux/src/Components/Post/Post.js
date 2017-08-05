@@ -55,8 +55,8 @@ function mapStateToProps(state, ownProps) {
 
   return {
     post: state.posts.find(findPost),
-    loading: state.ajaxCalls.getAuthors.loading && state.ajaxCalls.getAllPosts.loading,
-    hasError: state.ajaxCalls.getAuthors.hasError && state.ajaxCalls.getAllPosts.hasError,
+    loading: state.ajaxCalls.getAllPosts.loading,
+    hasError: state.ajaxCalls.getAllPosts.hasError,
   };
 }
 
