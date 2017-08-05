@@ -9,12 +9,13 @@ function posts(req, res) {
     const posts = db.get('posts').value();
 
     setTimeout(() => {
-      res.status(200).json({posts});
+      res.status(200).json(posts);
     }, 3000);
 }
 
 function author(req, res) {
-    const posts = db.get('posts').filter({author: req.swagger.params.name.value});
+    console.log(decodeURI(req.swagger.params.name.value));
+    const posts = db.get('posts').filter({author: decodeURI(req.swagger.params.name.value)});
 
     setTimeout(() => {
       if(posts.length) {
