@@ -13,6 +13,9 @@ class AuthorPosts extends Component {
     history: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
+    posts: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired,
+    hasError: PropTypes.bool.isRequired,
   }
 
   render() {
