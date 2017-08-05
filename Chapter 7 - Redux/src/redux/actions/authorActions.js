@@ -1,19 +1,23 @@
 import actions from '../actionTypes/actionTypes';
 import apiCall from '../../services/api/apiCall';
 
-export const getAllAuthors = dispatch => {
+export const getAllAuthors = () => {
 
-  dispatch(authorsApiCallStart());
+  return dispatch => {
 
-  apiCall('authors', {}, 'GET')
-    .then(authors => {
-      dispatch(authorsApiCallSuccess());
-      dispatch(getauthors(authors));
-    })
-    .catch(error => {
-      dispatch(authorsApiCallFailure());
-      console.error(error);
-    });
+    dispatch(authorsApiCallStart());
+
+    apiCall('authors', {}, 'GET')
+      .then(authors => {
+        dispatch(authorsApiCallSuccess());
+        dispatch(getauthors(authors));
+      })
+      .catch(error => {
+        dispatch(authorsApiCallFailure());
+        console.error(error);
+      });
+
+  };
 
 };
 
