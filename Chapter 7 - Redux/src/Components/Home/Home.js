@@ -10,6 +10,8 @@ class Home extends Component {
 
   static propTypes = {
     posts: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired,
+    hasError: PropTypes.bool.isRequired,
   }
 
   render () {
@@ -30,7 +32,7 @@ class Home extends Component {
             null
         }
         {
-          this.props.posts.map(post => <PostSummary key={post.id} post={post}>Post</PostSummary>)
+          this.props.posts.map(post => <PostSummary key={post.id} post={post} />)
         }
       </div>
     );

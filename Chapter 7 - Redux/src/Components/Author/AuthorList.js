@@ -1,32 +1,18 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import ErrorMessage from '../Common/ErrorMessage';
+import { connect } from 'react-redux';
 
-import apiCall from '../../services/api/apiCall';
 import routes from '../../routes';
 import LoadingIndicator from '../Common/LoadingIndicator';
+import ErrorMessage from '../Common/ErrorMessage';
 
 class AuthorList extends Component {
-  constructor() {
-    super();
 
-    this.state = {
-      authors: [],
-      loading: false,
-      hasError: false,
-    };
-  }
-
-  componentWillMount() {
-    this.setState({loading: true});
-    apiCall(`authors`, {}, 'GET')
-    .then(authors => {
-      this.setState({authors, loading: false});
-    })
-    .catch(error => {
-      this.setState({hasError: true, loading: false});
-      console.error(error);
-    });
+  static propTypes = {
+    authors: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired,
+    hasError: PropTypes.bool.isRequired,
   }
 
   render() {
@@ -34,14 +20,14 @@ class AuthorList extends Component {
       <div className={`container`}>
         <h2>Authors</h2>
         {
-          this.state.loading
+          this.props.loading
           ?
             <LoadingIndicator />
           :
             null
         }
         {
-          this.state.hasError
+          this.props.hasError
           ?
             <ErrorMessage title={'Error!'} message={'Unable to retrieve Author List!'} />
           :
@@ -49,7 +35,7 @@ class AuthorList extends Component {
         }
         <ul className={`list-group`}>
           {
-            this.state.authors.map((author, index) =>
+            this.props.authors.map((author, index) =>
               <li className={`list-group-item`} key={index}>
                 <NavLink to={routes.author.replace(':authorname', author)}>{author}</NavLink>
               </li>
@@ -61,4 +47,12 @@ class AuthorList extends Component {
   }
 }
 
-export default AuthorList;
+function mapStateToProps(state) {
+  return {
+    authors: state.authors,
+    loading: state.ajaxCalls.getAuthors.loading,
+    hasError: state.ajaxCalls.getAuthors.hasError,
+  };
+}
+
+export default connect(mapStateToProps)(AuthorList);
