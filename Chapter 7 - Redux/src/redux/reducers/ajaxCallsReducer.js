@@ -6,6 +6,7 @@ const ajaxCallsReducer = (state = initialState.ajaxCalls, action) => {
 
     case actions.GET_POSTS_AJAX_CALL_START:
       return Object.assign(
+        {},
         state,
         {
           getAllPosts: {
@@ -17,6 +18,7 @@ const ajaxCallsReducer = (state = initialState.ajaxCalls, action) => {
 
     case actions.GET_POSTS_AJAX_CALL_SUCCESS:
       return Object.assign(
+        {},
         state,
         {
           getAllPosts: {
@@ -29,6 +31,7 @@ const ajaxCallsReducer = (state = initialState.ajaxCalls, action) => {
 
     case actions.GET_POSTS_AJAX_CALL_FAILURE:
       return Object.assign(
+        {},
         state,
         {
           getAllPosts: {
@@ -41,6 +44,7 @@ const ajaxCallsReducer = (state = initialState.ajaxCalls, action) => {
 
     case actions.GET_AUTHORS_AJAX_CALL_START:
       return Object.assign(
+        {},
         state,
         {
           getAuthors: {
@@ -52,6 +56,7 @@ const ajaxCallsReducer = (state = initialState.ajaxCalls, action) => {
 
     case actions.GET_AUTHORS_AJAX_CALL_SUCCESS:
       return Object.assign(
+        {},
         state,
         {
           getAuthors: {
@@ -63,6 +68,7 @@ const ajaxCallsReducer = (state = initialState.ajaxCalls, action) => {
 
     case actions.GET_AUTHORS_AJAX_CALL_FAILURE:
       return Object.assign(
+        {},
         state,
         {
           getAuthors: {
@@ -74,6 +80,7 @@ const ajaxCallsReducer = (state = initialState.ajaxCalls, action) => {
 
     case actions.ADD_POST_AJAX_CALL_START:
       return Object.assign(
+        {},
         state,
         {
           addPost: {
@@ -85,6 +92,7 @@ const ajaxCallsReducer = (state = initialState.ajaxCalls, action) => {
 
     case actions.ADD_POST_AJAX_CALL_SUCCESS:
       return Object.assign(
+        {},
         state,
         {
           addPost: {
@@ -96,6 +104,7 @@ const ajaxCallsReducer = (state = initialState.ajaxCalls, action) => {
 
     case actions.ADD_POST_AJAX_CALL_FAILURE:
       return Object.assign(
+        {},
         state,
         {
           addPost: {
