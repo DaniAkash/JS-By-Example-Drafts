@@ -42,6 +42,6 @@ export const authorsApiCallFailure = () => {
 export const getauthors = (authors) => {
   return {
     type: actions.GET_AUTHORS,
-    data: authors,
+    payload: { authors },
   };
 };

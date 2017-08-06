@@ -42,7 +42,7 @@ export const postsApiCallFailure = () => {
 export const getPosts = (posts) => {
   return {
     type: actions.GET_POSTS,
-    data: posts,
+    payload: { posts },
   };
 };
 
