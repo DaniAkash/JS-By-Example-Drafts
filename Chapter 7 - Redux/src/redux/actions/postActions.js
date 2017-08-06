@@ -45,3 +45,41 @@ export const getPosts = (posts) => {
     data: posts,
   };
 };
+
+export const addNewPost = (body) => {
+  return dispatch => {
+
+    dispatch(addPostApiCallStart());
+
+    apiCall(`post`, body)
+    .then(() => {
+
+      dispatch(addPostApiCallSuccess());
+      dispatch(getAllPosts());
+
+    })
+    .catch(error => {
+
+      dispatch(addPostApiCallFailure());
+
+    });
+  };
+};
+
+export const addPostApiCallStart = () => {
+  return {
+    type: actions.ADD_POST_AJAX_CALL_START
+  };
+};
+
+export const addPostApiCallSuccess = () => {
+  return {
+    type: actions.ADD_POST_AJAX_CALL_SUCCESS
+  };
+};
+
+export const addPostApiCallFailure = () => {
+  return {
+    type: actions.ADD_POST_AJAX_CALL_FAILURE
+  };
+};

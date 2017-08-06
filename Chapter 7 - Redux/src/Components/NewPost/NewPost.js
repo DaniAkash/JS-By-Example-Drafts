@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import uuidv4 from 'uuid/v4';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import apiCall from '../../services/api/apiCall';
 import ErrorMessage from '../Common/ErrorMessage';
 import SuccessMessage from '../Common/SuccessMessage';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import PostInputField from './Components/PostInputField';
+import * as postActions from '../../redux/actions/postActions';
 
 class NewPost extends Component {
 
@@ -15,6 +17,9 @@ class NewPost extends Component {
     history: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
+    postActions: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired,
+    hasError: PropTypes.bool.isRequired,
   }
 
   constructor() {
@@ -25,9 +30,7 @@ class NewPost extends Component {
       title: '',
       content: '',
       noOfLines: 0,
-      loading: false,
       success: false,
-      hasError: false,
     };
     this.editAuthorName = this.editAuthorName.bind(this);
     this.editContent = this.editContent.bind(this);
@@ -50,7 +53,6 @@ class NewPost extends Component {
 
   submit() {
     if(this.state.author && this.state.content && this.state.title) {
-      this.setState({loading: true});
 
       const date = new Date();
       const epoch = (date.getTime()/1000).toFixed(0).toString();
@@ -63,34 +65,20 @@ class NewPost extends Component {
         comments: [],
       };
 
-      apiCall(`post`, body)
-      .then(() => {
-
-        this.setState({
-          author: '',
-          title: '',
-          content: '',
-          noOfLines: 0,
-          loading: false,
-          success: true,
-        });
-
-        setTimeout(() => {
-          this.setState({success: false});
-        }, 3000);
-
-      })
-      .catch(error => {
-        this.setState({hasError: true, loading: false});
-        console.error(error);
-
-        setTimeout(() => {
-          this.setState({hasError: false});
-        }, 3000);
-      });
+      this.props.postActions.addNewPost(body);
 
     } else {
       alert('Please Fill in all the fields');
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(this.props.loading !== nextProps.loading || this.props.hasError !== nextProps.hasError) {
+      if(nextProps.loading === false && nextProps.hasError === false) {
+        this.setState({success: true});
+      } else if(nextProps.loading === false && nextProps.hasError === true) {
+        this.setState({success: false});
+      }
     }
   }
 
@@ -124,7 +112,7 @@ class NewPost extends Component {
         </div>
 
         {
-          this.state.loading
+          this.props.loading
           ?
             <LoadingIndicator />
           :
@@ -132,7 +120,7 @@ class NewPost extends Component {
         }
 
         {
-          this.state.hasError
+          this.props.hasError
           ?
             <ErrorMessage title={'Error!'} message={`Unable to submit post!`} />
           :
@@ -152,4 +140,21 @@ class NewPost extends Component {
   }
 }
 
-export default withRouter(NewPost);
+function mapStateToProps(state) {
+  return {
+    loading: state.ajaxCalls.addPost.loading,
+    hasError: state.ajaxCalls.addPost.hasError,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    postActions: bindActionCreators(postActions, dispatch),
+  };
+}
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(NewPost)
+);
