@@ -73,7 +73,7 @@ class NewPost extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.loading !== nextProps.loading || this.props.hasError !== nextProps.hasError) {
+    if(this.props !== nextProps) {
       if(nextProps.loading === false && nextProps.hasError === false) {
         this.setState({
           success: true,
