@@ -116,41 +116,6 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  /comment:
-    x-swagger-router-controller: comment
-    post:
-      description: add new comment
-      operationId: addComment
-      parameters:
-        - in: body
-          name: body
-          description: a new comment by someone
-          required: true
-          schema:
-            type: object
-            required:
-              - postId
-              - id
-              - name
-              - comment
-            properties:
-              postId:
-                type: string
-              id:
-                type: string
-              name:
-                type: string
-              comment:
-                type: string
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/SuccessResponse"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"            
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -167,19 +132,6 @@ definitions:
     properties:
       message:
         type: string
-  Comment:
-    type: object
-    required:
-      - id
-      - name
-      - comment
-    properties:
-      id:
-        type: string
-      name:
-        type: string
-      comment:
-        type: string
   Post:
     type: object
     required:
@@ -187,7 +139,6 @@ definitions:
       - title
       - content
       - datetime
-      - comments
       - author
     properties:
       id:
@@ -198,9 +149,5 @@ definitions:
         type: string
       datetime:
         type: string
-      comments:
-        type: array
-        items:
-          $ref: "#/definitions/Comment"
       author:
         type: string
