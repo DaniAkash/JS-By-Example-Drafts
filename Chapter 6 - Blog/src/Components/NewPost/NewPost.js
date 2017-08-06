@@ -60,7 +60,6 @@ class NewPost extends Component {
         title: this.state.title,
         content: this.state.content,
         datetime: epoch,
-        comments: [],
       };
 
       apiCall(`post`, body)
