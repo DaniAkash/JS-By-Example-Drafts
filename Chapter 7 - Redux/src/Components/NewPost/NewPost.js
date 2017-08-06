@@ -75,7 +75,12 @@ class NewPost extends Component {
   componentWillReceiveProps(nextProps) {
     if(this.props.loading !== nextProps.loading || this.props.hasError !== nextProps.hasError) {
       if(nextProps.loading === false && nextProps.hasError === false) {
-        this.setState({success: true});
+        this.setState({
+          success: true,
+          author: '',
+          title: '',
+          content: '',
+        });
       } else if(nextProps.loading === false && nextProps.hasError === true) {
         this.setState({success: false});
       }
